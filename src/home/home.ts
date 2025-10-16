@@ -1,11 +1,13 @@
-import fileIcons from "file-icons-js";
+import { localUtils } from "../code/localUtils.js";
 
-const filename = "document.pdf";
-const iconClass = fileIcons.getClass(filename);
+const file = document.getElementById('file-type')?.innerText;
+console.log(file);
 
-const iconElement = document.getElementById("file-type");
-if (iconElement) {
-  // add the class for the icon
-  iconElement.className = iconClass || "fi fi-file"; 
-  iconElement.textContent = filename;
+if (file) {
+    const file_type = document.getElementById('file-type');
+    const iconClass = localUtils.getFileIcon(file);
+    console.log(`${file}: ${iconClass}`);
+    if (file_type)
+        file_type.innerHTML = `<i class="${iconClass}"></i>`;;
+        file_type?.style.setProperty('color', localUtils.getFileIconColor(iconClass));
 }

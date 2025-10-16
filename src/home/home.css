@@ -101,6 +101,11 @@ body {
     background-color: #c0c0c0;
 }
 
+#content-box div {
+    font-size: 50px;
+    background-color: transparent;
+}
+
 #task-box {
     align-items: center;
     background-color: #d0d0d0;
