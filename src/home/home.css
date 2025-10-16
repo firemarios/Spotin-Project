@@ -78,6 +78,7 @@ body {
     border-radius: 5px;
     text-align: center;
     cursor: pointer;
+    transition: 0.2s all;
 }
 
 .pages p {
@@ -95,6 +96,7 @@ body {
     width: 150px;
     border-radius: 10px;
     cursor: pointer;
+    transition: 0.2s all;
 }
 
 #content-box:hover {
@@ -116,6 +118,7 @@ body {
     cursor: pointer;
     height: 10px;
     gap: 10px;
+    transition: 0.2s all;
 }
 
 #task-box:hover {
