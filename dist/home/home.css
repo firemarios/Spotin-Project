@@ -22,6 +22,17 @@ body {
     margin-right: 15px;
 }
 
+.action-bar div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.action-bar p {
+    color: white;
+}
+
 .action-bar {
     padding: 5px;
     background-color: #353a40;
@@ -98,6 +109,8 @@ body {
     width: 95%;
     border-radius: 10px;
     cursor: pointer;
+    height: 10px;
+    gap: 10px;
 }
 
 #task-box:hover {

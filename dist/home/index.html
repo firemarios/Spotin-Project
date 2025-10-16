@@ -6,12 +6,16 @@
         <title>Home</title>
         <link rel="stylesheet" href="./home.css">
         <link rel="icon" href="../assets/logo.png" />
+        <link rel="stylesheet" href="https://raw.githubusercontent.com/file-icons/atom/master/lib/styles/file-icons.less">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=assignment,files,home" />
     </head>
     <body>
         <div class="action-bar">
             <img src="../assets/logo.png" alt="Logo" class="logo">
-            <img src="../assets/user.png" alt="User" class="user-icon">
+            <div>
+                <p>{n} People online</p>
+                <img src="../assets/user.png" alt="User" class="user-icon">
+            </div>
         </div>
         <div class="content">
             <div class="pages">
@@ -33,7 +37,7 @@
                 <p>Τελευταίο Περιεχόμενο</p>
                 <div class="recent-content">
                     <div id="content-box">
-                        <h1>.docx</h1>
+                        <div id="file-type">.docx</div>
                         <p>{title}</p>
                     </div>
                 </div>          
@@ -41,10 +45,13 @@
                 <div class="current-tasks">
                     <div id="task-box">
                         <h3>{title}</h3>
+                        <p>Δημιουργία: {date}</p>
                         <p>Προθεσμία: {date}</p>
+                        <p>Μέλος: {name}</p>
                     </div>
                 </div>
             </div>
         </div>
+        <script src="/bundle.js"></script>
     </body>
 </html>

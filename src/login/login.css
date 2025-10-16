@@ -59,5 +59,8 @@ input[type="text"], input[type="password"] {
     font-size: 16px;
     height: 40px;
     border-radius: 5px;
+    border-color: transparent;
+    color: white;
+    background-color: #406792;
     cursor: pointer;
 }

@@ -6,14 +6,25 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc && npm run copy",
-    "copy": "copyfiles -u 1 \"src/**/*.{html,css}\" \"src/assets/**/*\" dist/"
+    "copy": "copyfiles -u 1 \"src/**/*.{html,css}\" \"src/assets/**/*\" dist/ && npm run deploy",
+    "deploy": "npx webpack serve"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
+    "@types/node": "^24.8.0",
     "copyfiles": "^2.4.1",
-    "typescript": "^5.9.3"
+    "ts-loader": "^9.5.4",
+    "typescript": "^5.9.3",
+    "webpack": "^5.102.1",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.2"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^7.1.0",
+    "file-icons": "^0.0.0",
+    "file-icons-js": "github:websemantics/file-icons-js"
   }
 }
