@@ -63,4 +63,9 @@ input[type="text"], input[type="password"] {
     color: white;
     background-color: #406792;
     cursor: pointer;
+    transition: 0.2s all;
+}
+
+.submit-btn:hover {
+    background-color: #305080;
 }
