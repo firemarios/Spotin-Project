@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home</title>
+        <link rel="stylesheet" href="./home.css">
+        <link rel="icon" href="../assets/logo.png" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=assignment,files,home" />
+    </head>
+    <body>
+        <div class="action-bar">
+            <img src="../assets/logo.png" alt="Logo" class="logo">
+            <img src="../assets/user.png" alt="User" class="user-icon">
+        </div>
+        <div class="content">
+            <div class="pages">
+                <div class="page active" id="home">
+                    <span class="material-symbols-outlined">home</span>
+                    <p>Αρχική</p>
+                </div>
+                <div class="page" id="tasks">
+                    <span class="material-symbols-outlined">assignment</span>
+                    <p>Εργασίες</p>
+                </div>
+                <div class="page" id="library">
+                    <span class="material-symbols-outlined">files</span>
+                    <p>Αρχεία</p>
+                </div>
+            </div>
+            <div class="main">
+                <h1 class="username">Γειά, {name}</h1>
+                <p>Τελευταίο Περιεχόμενο</p>
+                <div class="recent-content">
+                    <div id="content-box">
+                        <h1>.docx</h1>
+                        <p>{title}</p>
+                    </div>
+                </div>          
+                <p>Τρέχοντες Εργασίες</p>
+                <div class="current-tasks">
+                    <div id="task-box">
+                        <h3>{title}</h3>
+                        <p>Προθεσμία: {date}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
