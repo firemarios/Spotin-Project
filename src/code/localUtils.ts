@@ -86,6 +86,10 @@ export class localUtils {
                 <div class="page" id="library" onclick="document.location='../library'">
                     <span class="material-symbols-outlined">files</span>
                     <p>Αρχεία</p>
+                </div>
+                <div class="page" id="setting" onclick="document.location='../settings'">
+                    <span class="material-symbols-outlined">settings</span>
+                    <p>Ρυθμίσεις</p>
                 </div>`;
     }
     public static getActionBarHTML(): string {
@@ -96,7 +100,12 @@ export class localUtils {
                 <div class="sub-menu">
                     <button onclick="logout()">Logout</button>
                 </div>
-            </div>`;
+            </div>
+            <script src="../code/localUtils.js"></script>`;
     }
 }
 
+function logout() {
+    document.location='../login';
+}
+(window as any).logout = logout;

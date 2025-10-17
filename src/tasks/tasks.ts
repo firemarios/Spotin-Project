@@ -23,3 +23,11 @@ function pfpClicked() {
     subMenu?.classList.toggle('show-sub-menu');
 }
 (window as any).pfpClicked = pfpClicked;
+
+function addBtnClicked() {
+    const addTaskForm = document.getElementById('add-task-form');
+    if (addTaskForm) {
+        addTaskForm.style.display = 'flex';
+    }
+}
+(window as any).addBtnClicked = addBtnClicked;

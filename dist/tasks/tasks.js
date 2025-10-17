@@ -20,4 +20,11 @@ function pfpClicked() {
     subMenu === null || subMenu === void 0 ? void 0 : subMenu.classList.toggle('show-sub-menu');
 }
 window.pfpClicked = pfpClicked;
+function addBtnClicked() {
+    const addTaskForm = document.getElementById('add-task-form');
+    if (addTaskForm) {
+        addTaskForm.style.display = 'flex';
+    }
+}
+window.addBtnClicked = addBtnClicked;
 //# sourceMappingURL=tasks.js.map
