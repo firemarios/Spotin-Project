@@ -75,15 +75,15 @@ export class localUtils {
         }
     }
     public static getSideBarHTML(): string {
-        return `<div class="page" id="home" onclick="document.location='../home/index.html'">
+        return `<div class="page" id="home" onclick="document.location='../home'">
                     <span class="material-symbols-outlined">home</span>
                     <p>Αρχική</p>
                 </div>
-                <div class="page" id="tasks" onclick="document.location='../tasks/index.html'">
+                <div class="page" id="tasks" onclick="document.location='../tasks'">
                     <span class="material-symbols-outlined">assignment</span>
                     <p>Εργασίες</p>
                 </div>
-                <div class="page" id="library" onclick="document.location='../library/index.html'">
+                <div class="page" id="library" onclick="document.location='../library'">
                     <span class="material-symbols-outlined">files</span>
                     <p>Αρχεία</p>
                 </div>`;
