@@ -74,5 +74,29 @@ export class localUtils {
                 return '#000000';
         }
     }
+    public static getSideBarHTML(): string {
+        return `<div class="page" id="home" onclick="document.location='../home/index.html'">
+                    <span class="material-symbols-outlined">home</span>
+                    <p>Αρχική</p>
+                </div>
+                <div class="page" id="tasks" onclick="document.location='../tasks/index.html'">
+                    <span class="material-symbols-outlined">assignment</span>
+                    <p>Εργασίες</p>
+                </div>
+                <div class="page" id="library" onclick="document.location='../library/index.html'">
+                    <span class="material-symbols-outlined">files</span>
+                    <p>Αρχεία</p>
+                </div>`;
+    }
+    public static getActionBarHTML(): string {
+        return `<img src="../assets/logo.png" alt="Logo" class="logo">
+            <div>
+                <p>{n} People online</p>
+                <img src="../assets/user.png" alt="User" class="user-icon" onclick="pfpClicked()">
+                <div class="sub-menu">
+                    <button onclick="logout()">Logout</button>
+                </div>
+            </div>`;
+    }
 }
 
