@@ -4,7 +4,7 @@ function NavigatingTo() {
     const actionBar = document.querySelector('.action-bar');
     const pages = document.querySelector('.pages');
     if (pages) {
-        pages.innerHTML = localUtils.getSideBarHTML(true);
+        pages.innerHTML = localUtils.getSideBarHTML(false);
         const tasks = document.getElementById('files');
         if (tasks) {
             tasks.removeAttribute('onclick');
@@ -12,10 +12,7 @@ function NavigatingTo() {
         }
     }
     if (actionBar) {
-        actionBar.innerHTML = localUtils.getActionBarHTML(true);
-        let innerHTML = actionBar.innerHTML;
-        innerHTML = innerHTML.replace("false", "true");
-        actionBar.innerHTML = innerHTML;
+        actionBar.innerHTML = localUtils.getActionBarHTML(false);
     }
 }
 for (let i = 0; i < 50; i++) {

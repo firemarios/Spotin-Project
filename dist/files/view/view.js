@@ -14,9 +14,6 @@ function NavigatingTo() {
     }
     if (actionBar) {
         actionBar.innerHTML = localUtils.getActionBarHTML(true);
-        let innerHTML = actionBar.innerHTML;
-        innerHTML = innerHTML.replace("false", "true");
-        actionBar.innerHTML = innerHTML;
     }
 }
 const hash = window.location.hash;

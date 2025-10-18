@@ -15,9 +15,6 @@ function NavigatingTo() {
     }
     if (actionBar) {
         actionBar.innerHTML = localUtils.getActionBarHTML(false);
-        let innerHTML = actionBar.innerHTML;
-        innerHTML = innerHTML.replace("false", "true");
-        actionBar.innerHTML = innerHTML;
     }
 }
 
