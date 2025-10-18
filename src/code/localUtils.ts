@@ -53,25 +53,25 @@ export class localUtils {
             case 'fa fa-file-image':
                 return '#FF5733';
             case 'fa fa-file-video':
-                return '#33C1FF'; 
+                return '#217498ff'; 
             case 'fa fa-file-audio':
-                return '#33FF57'; 
+                return '#25b580ff'; 
             case 'fa fa-file-pdf':
-                return '#FF3333';
+                return '#e5252a';
             case 'fa fa-file-alt':
                 return '#AAAAAA';
             case 'fa fa-file-archive':
                 return '#FF33A8';
             case 'fa fa-file-code':
-                return '#8E44AD';
+                return '#6000c6';
             case 'fa fa-file-word':
-                return '#2E86C1';
+                return '#0363d1';
             case 'fa fa-file-excel':
-                return '#27AE60';
+                return '#00733a';
             case 'fa fa-file-powerpoint':
-                return '#E67E22';
+                return '#df3303';
             default:
-                return '#000000';
+                return '#4a4a4aff';
         }
     }
     public static getSideBarHTML(inner:boolean): string {

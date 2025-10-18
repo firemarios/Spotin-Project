@@ -21,3 +21,25 @@ function NavigatingTo() {
     }
 }
 
+const hash = window.location.hash;
+  const filename = hash.startsWith("#/") ? hash.slice(2) : "";
+
+  if (filename) {
+    const file = decodeURIComponent(filename);
+    const fileNameElement = document.getElementById("file-name");
+    const fileTypeElement = document.getElementById("file-type");
+    const descriptionElement = document.getElementById("description");
+    if (fileNameElement && fileTypeElement && descriptionElement) {
+        fileNameElement.textContent = file;
+        const fileExtension = file.split('.').pop()?.toLowerCase() || '';
+        fileTypeElement.textContent = fileExtension
+        const iconClass = localUtils.getFileIcon(file);
+        if (fileTypeElement) {
+            fileTypeElement.innerHTML = `<i class="${iconClass}"></i>`;;
+            fileTypeElement?.style.setProperty('color', localUtils.getFileIconColor(iconClass));
+        }
+    }
+  }
+  else {
+        document.location = "../";
+  }

@@ -1,12 +1,10 @@
 var _a;
 import { localUtils } from "../code/localUtils.js";
 const file = (_a = document.getElementById('file-type')) === null || _a === void 0 ? void 0 : _a.innerText;
-console.log(file);
 NavigatingTo();
 if (file) {
     const file_type = document.getElementById('file-type');
     const iconClass = localUtils.getFileIcon(file);
-    console.log(`${file}: ${iconClass}`);
     if (file_type)
         file_type.innerHTML = `<i class="${iconClass}"></i>`;
     ;

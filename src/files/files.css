@@ -24,6 +24,28 @@
     height: 100vh;
 }
 
+#file-viewer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+    gap: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    max-height: 65vh;
+    overflow-y: auto
+}
+
+#file {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+#file p {
+    font-size: 18px;
+    background-color: transparent;
+}
+
 #content-box {
     align-content: center;
     justify-items: center;

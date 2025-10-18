@@ -1,3 +1,21 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+@media (max-width: 850px) {
+    .content {
+        flex-direction: column !important;
+        justify-items: center !important;
+        margin-left: 0 !important;
+    }
+    .pages, .main {
+        width: 93% !important;
+        height: auto !important;
+    }
+}
+
 .action-bar {
     display: flex;
     justify-content: space-between;
