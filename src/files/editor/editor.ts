@@ -1,5 +1,4 @@
 import { localUtils } from "../../code/localUtils.js";
-import * as monaco from "../../monaco-editor/esm/vs/editor/editor.api";
 
 NavigatingTo();
 
@@ -22,9 +21,3 @@ function NavigatingTo() {
     }
 }
 
-const editor = monaco.editor.create(document.getElementById("editor")!, {
-  value: `// Start typing here...\nconsole.log("Hello world!");`,
-  language: "typescript",
-  theme: "vs-dark",
-  automaticLayout: true,
-});
