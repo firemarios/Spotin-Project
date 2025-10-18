@@ -31,29 +31,29 @@ for (let i = 0; i < 50; i++) {
     }
 }
 
-const files = document.querySelectorAll<HTMLElement>('#file-type');
-const file_contentBox = document.querySelectorAll<HTMLElement>('#content-box');
-const file_names = document.querySelectorAll('#file-name');
+// const files = document.querySelectorAll<HTMLElement>('#file-type');
+// const file_contentBox = document.querySelectorAll<HTMLElement>('#content-box');
+// const file_names = document.querySelectorAll('#file-name');
 
-if (files && file_names && file_contentBox) {
-    files.forEach((element, index) => {
-        const el = element as HTMLElement;
-        const name = file_names[index];
-        const box = file_contentBox[index];
+// if (files && file_names && file_contentBox) {
+//     files.forEach((element, index) => {
+//         const el = element as HTMLElement;
+//         const name = file_names[index];
+//         const box = file_contentBox[index];
 
-        if (name)
+//         if (name)
 
-        el.textContent = name.textContent;
+//         el.textContent = name.textContent;
 
-        const iconClass = localUtils.getFileIcon(el.innerHTML);
-        el.innerHTML = `<i class="${iconClass}"></i>`;
-        el.style.setProperty('color', localUtils.getFileIconColor(iconClass));
+//         const iconClass = localUtils.getFileIcon(el.innerHTML);
+//         el.innerHTML = `<i class="${iconClass}"></i>`;
+//         el.style.setProperty('color', localUtils.getFileIconColor(iconClass));
 
-        if (box)
+//         if (box)
 
-        box.onclick = () => {
-            if (name)
-            document.location = "./view/#/" + name.textContent;
-        };
-    });
-}
+//         box.onclick = () => {
+//             if (name)
+//             document.location = "./view/#/" + name.textContent;
+//         };
+//     });
+// }
