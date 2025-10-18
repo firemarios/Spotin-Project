@@ -25,6 +25,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^7.1.0",
     "file-icons": "^0.0.0",
-    "file-icons-js": "github:websemantics/file-icons-js"
+    "file-icons-js": "github:websemantics/file-icons-js",
+    "monaco-editor": "^0.54.0"
   }
 }

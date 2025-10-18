@@ -15,11 +15,6 @@ function NavigatingTo() {
         actionBar.innerHTML = localUtils.getActionBarHTML();
     }
 }
-function pfpClicked() {
-    const subMenu = document.querySelector('.sub-menu');
-    subMenu === null || subMenu === void 0 ? void 0 : subMenu.classList.toggle('show-sub-menu');
-}
-window.pfpClicked = pfpClicked;
 function addBtnClicked() {
     const addTaskForm = document.getElementById('add-task-form');
     if (addTaskForm) {
@@ -27,4 +22,11 @@ function addBtnClicked() {
     }
 }
 window.addBtnClicked = addBtnClicked;
+function closeForm() {
+    const addTaskForm = document.getElementById('add-task-form');
+    if (addTaskForm) {
+        addTaskForm.style.display = 'none';
+    }
+}
+window.closeForm = closeForm;
 //# sourceMappingURL=tasks.js.map

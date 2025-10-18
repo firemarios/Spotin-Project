@@ -29,9 +29,3 @@ function NavigatingTo() {
         actionBar.innerHTML = localUtils.getActionBarHTML();
     }
 }
-
-function pfpClicked() {
-    const subMenu = document.querySelector('.sub-menu');
-    subMenu?.classList.toggle('show-sub-menu');
-}
-(window as any).pfpClicked = pfpClicked;

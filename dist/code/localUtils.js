@@ -109,4 +109,9 @@ function logout() {
     document.location = '../login';
 }
 window.logout = logout;
+function pfpClicked() {
+    const subMenu = document.querySelector('.sub-menu');
+    subMenu === null || subMenu === void 0 ? void 0 : subMenu.classList.toggle('show-sub-menu');
+}
+window.pfpClicked = pfpClicked;
 //# sourceMappingURL=localUtils.js.map

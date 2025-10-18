@@ -18,12 +18,6 @@ function NavigatingTo() {
     }
 }
 
-function pfpClicked() {
-    const subMenu = document.querySelector('.sub-menu');
-    subMenu?.classList.toggle('show-sub-menu');
-}
-(window as any).pfpClicked = pfpClicked;
-
 function addBtnClicked() {
     const addTaskForm = document.getElementById('add-task-form');
     if (addTaskForm) {
@@ -31,3 +25,11 @@ function addBtnClicked() {
     }
 }
 (window as any).addBtnClicked = addBtnClicked;
+
+function closeForm() {
+    const addTaskForm = document.getElementById('add-task-form');
+    if (addTaskForm) {
+        addTaskForm.style.display = 'none';
+    }
+}
+(window as any).closeForm = closeForm;
