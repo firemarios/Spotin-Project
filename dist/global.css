@@ -9,10 +9,13 @@ body {
         flex-direction: column !important;
         justify-items: center !important;
         margin-left: 0 !important;
+        margin-right: 1% !important;
     }
     .pages, .main {
         width: 93% !important;
         height: auto !important;
+        justify-self: center !important;
+        margin-left: 0 !important;
     }
 }
 

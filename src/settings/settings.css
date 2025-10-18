@@ -24,23 +24,41 @@
     height: 100vh;
 }
 
-#content-box {
-    align-content: center;
-    justify-items: center;
+#users {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 300px;
+    overflow: auto;
+}
+
+#user {
     background-color: #d0d0d0;
-    width: 150px;
-    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 20px;
+}
+
+.actions {
+    background-color: transparent !important;
+    gap: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+}
+
+.actions span {
     cursor: pointer;
-    transition: 0.2s all;
 }
 
-#content-box:hover {
-    background-color: #c0c0c0;
+.actions span:hover {
+    opacity: 0.6;
 }
 
-#content-box div {
-    font-size: 50px;
-    background-color: transparent;
+#delete {
+    color: red;
 }
 
 .material-symbols-outlined {

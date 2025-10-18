@@ -1,3 +1,19 @@
+@media (max-width: 800px) {
+    .main {
+        flex-direction: column !important;
+        justify-items: center !important;
+    }
+    #actions {
+        width: auto !important;
+    }
+    #actions button {
+        width: 100% !important;
+    }
+    #description {
+        margin-left: 25px;
+    }
+}
+
 .content {
     display: flex;
     gap: 20px;

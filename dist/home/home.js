@@ -1,15 +1,5 @@
-var _a;
 import { localUtils } from "../code/localUtils.js";
-const file = (_a = document.getElementById('file-type')) === null || _a === void 0 ? void 0 : _a.innerText;
 NavigatingTo();
-if (file) {
-    const file_type = document.getElementById('file-type');
-    const iconClass = localUtils.getFileIcon(file);
-    if (file_type)
-        file_type.innerHTML = `<i class="${iconClass}"></i>`;
-    ;
-    file_type === null || file_type === void 0 ? void 0 : file_type.style.setProperty('color', localUtils.getFileIconColor(iconClass));
-}
 function NavigatingTo() {
     const actionBar = document.querySelector('.action-bar');
     const pages = document.querySelector('.pages');
@@ -24,5 +14,25 @@ function NavigatingTo() {
     if (actionBar) {
         actionBar.innerHTML = localUtils.getActionBarHTML(false);
     }
+}
+const files = document.querySelectorAll('#file-type');
+const file_contentBox = document.querySelectorAll('#content-box');
+const file_names = document.querySelectorAll('#file-name');
+if (files && file_names && file_contentBox) {
+    files.forEach((element, index) => {
+        const el = element;
+        const name = file_names[index];
+        const box = file_contentBox[index];
+        if (name)
+            el.textContent = name.textContent;
+        const iconClass = localUtils.getFileIcon(el.innerHTML);
+        el.innerHTML = `<i class="${iconClass}"></i>`;
+        el.style.setProperty('color', localUtils.getFileIconColor(iconClass));
+        if (box)
+            box.onclick = () => {
+                if (name)
+                    document.location = "../files/view/#/" + name.textContent;
+            };
+    });
 }
 //# sourceMappingURL=home.js.map

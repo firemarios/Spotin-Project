@@ -1,16 +1,6 @@
 import { localUtils } from "../code/localUtils.js";
 
-const file = document.getElementById('file-type')?.innerText;
-
 NavigatingTo();
-
-if (file) {
-    const file_type = document.getElementById('file-type');
-    const iconClass = localUtils.getFileIcon(file);
-    if (file_type)
-        file_type.innerHTML = `<i class="${iconClass}"></i>`;;
-        file_type?.style.setProperty('color', localUtils.getFileIconColor(iconClass));
-}
 
 function NavigatingTo() {
     const actionBar = document.querySelector('.action-bar');
@@ -26,4 +16,31 @@ function NavigatingTo() {
     if (actionBar) {
         actionBar.innerHTML = localUtils.getActionBarHTML(false);
     }
+}
+
+const files = document.querySelectorAll<HTMLElement>('#file-type');
+const file_contentBox = document.querySelectorAll<HTMLElement>('#content-box');
+const file_names = document.querySelectorAll('#file-name');
+
+if (files && file_names && file_contentBox) {
+    files.forEach((element, index) => {
+        const el = element as HTMLElement;
+        const name = file_names[index];
+        const box = file_contentBox[index];
+
+        if (name)
+
+        el.textContent = name.textContent;
+
+        const iconClass = localUtils.getFileIcon(el.innerHTML);
+        el.innerHTML = `<i class="${iconClass}"></i>`;
+        el.style.setProperty('color', localUtils.getFileIconColor(iconClass));
+
+        if (box)
+
+        box.onclick = () => {
+            if (name)
+            document.location = "../files/view/#/" + name.textContent;
+        };
+    });
 }

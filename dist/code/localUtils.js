@@ -88,7 +88,7 @@ export class localUtils {
                     <span class="material-symbols-outlined">files</span>
                     <p>Αρχεία</p>
                 </div>
-                <div class="page" id="setting" onclick="document.location='${inner ? "../../settings" : "../settings"}'">
+                <div class="page" id="settings" onclick="document.location='${inner ? "../../settings" : "../settings"}'">
                     <span class="material-symbols-outlined">settings</span>
                     <p>Ρυθμίσεις</p>
                 </div>`;
