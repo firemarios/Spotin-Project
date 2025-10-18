@@ -2,6 +2,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     background-color: #f4f4f4;
+    overflow: hidden;
 }
 
 @media (max-width: 850px) {
@@ -40,7 +41,16 @@ body {
 .main {
     width: 80%;
     height: 100vh;
-    justify-items: center;
+    display: flex;
+    justify-content: center; /* center editor horizontally */
+    align-items: center;     /* center editor vertically if you want */
+    background-color: #1e1e1e; /* Monaco background fallback */
+}
+
+#container {
+    width: 90%;
+    height: 100vh; /* give a relative height inside .main */
+    border: 1px solid grey;
 }
 
 #content-box {

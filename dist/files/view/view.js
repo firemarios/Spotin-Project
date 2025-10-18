@@ -18,4 +18,4 @@ function NavigatingTo() {
         actionBar.innerHTML = innerHTML;
     }
 }
-//# sourceMappingURL=editor.js.map
+//# sourceMappingURL=view.js.map
