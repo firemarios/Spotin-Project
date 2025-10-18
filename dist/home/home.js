@@ -16,7 +16,7 @@ function NavigatingTo() {
     const actionBar = document.querySelector('.action-bar');
     const pages = document.querySelector('.pages');
     if (pages) {
-        pages.innerHTML = localUtils.getSideBarHTML();
+        pages.innerHTML = localUtils.getSideBarHTML(false);
         const home = document.getElementById('home');
         if (home) {
             home.removeAttribute('onclick');
@@ -24,7 +24,7 @@ function NavigatingTo() {
         }
     }
     if (actionBar) {
-        actionBar.innerHTML = localUtils.getActionBarHTML();
+        actionBar.innerHTML = localUtils.getActionBarHTML(false);
     }
 }
 //# sourceMappingURL=home.js.map

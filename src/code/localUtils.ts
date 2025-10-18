@@ -74,39 +74,39 @@ export class localUtils {
                 return '#000000';
         }
     }
-    public static getSideBarHTML(): string {
-        return `<div class="page" id="home" onclick="document.location='/home'">
+    public static getSideBarHTML(inner:boolean): string {
+        return `<div class="page" id="home" onclick="document.location='${inner ? "../../home" : "../home"}'">
                     <span class="material-symbols-outlined">home</span>
                     <p>Αρχική</p>
                 </div>
-                <div class="page" id="tasks" onclick="document.location='/tasks'">
+                <div class="page" id="tasks" onclick="document.location='${inner ? "../../tasks" : "../tasks"}'">
                     <span class="material-symbols-outlined">assignment</span>
                     <p>Εργασίες</p>
                 </div>
-                <div class="page" id="files" onclick="document.location='/files'">
+                <div class="page" id="files" onclick="document.location='${inner ? "../../files" : "../files"}'">
                     <span class="material-symbols-outlined">files</span>
                     <p>Αρχεία</p>
                 </div>
-                <div class="page" id="setting" onclick="document.location='/settings'">
+                <div class="page" id="setting" onclick="document.location='${inner ? "../../settings" : "../settings"}'">
                     <span class="material-symbols-outlined">settings</span>
                     <p>Ρυθμίσεις</p>
                 </div>`;
     }
-    public static getActionBarHTML(): string {
-        return `<img src="/assets/logo.png" alt="Logo" class="logo">
+    public static getActionBarHTML(inner:boolean): string {
+        return `<img src="${inner ? "../../assets/logo.png" : "../assets/logo.png"}" alt="Logo" class="logo">
             <div>
                 <p>{n} People online</p>
-                <img src="/assets/user.png" alt="User" class="user-icon" onclick="pfpClicked()">
+                <img src="${inner ? "../../assets/user.png" : "../assets/user.png"}" alt="User" class="user-icon" onclick="pfpClicked()">
                 <div class="sub-menu">
-                    <button onclick="logout()">Logout</button>
+                    <button onclick="logout(false)">Logout</button>
                 </div>
             </div>
-            <script src="/code/localUtils.js"></script>`;
+            <script src="${inner ? "../../code/localUtils.js" : "../code/localUtils.js"}"></script>`;
     }
 }
 
-function logout() {
-    document.location='/src/login';
+function logout(inner:boolean) {
+    document.location=`${inner ? "../../login" : "../login"}`;
 }
 (window as any).logout = logout;
 

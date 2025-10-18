@@ -4,7 +4,7 @@ function NavigatingTo() {
     const actionBar = document.querySelector('.action-bar');
     const pages = document.querySelector('.pages');
     if (pages) {
-        pages.innerHTML = localUtils.getSideBarHTML();
+        pages.innerHTML = localUtils.getSideBarHTML(false);
         const tasks = document.getElementById('tasks');
         if (tasks) {
             tasks.removeAttribute('onclick');
@@ -12,7 +12,7 @@ function NavigatingTo() {
         }
     }
     if (actionBar) {
-        actionBar.innerHTML = localUtils.getActionBarHTML();
+        actionBar.innerHTML = localUtils.getActionBarHTML(false);
     }
 }
 function addBtnClicked() {
