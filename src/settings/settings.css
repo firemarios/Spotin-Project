@@ -24,6 +24,25 @@
     height: 100vh;
 }
 
+.users-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#add {
+    margin-right: 10px;
+    border-radius: 50%;
+    background-color: #d0d0d0;
+    padding: 10px;
+    transition: 0.5 all;
+}
+
+#add:hover {
+    background-color: #c0c0c0;
+    cursor: pointer;
+}
+
 #users {
     display: flex;
     flex-direction: column;

@@ -52,6 +52,13 @@ input[type="text"], input[type="password"] {
     border-radius: 10px;
 }
 
+form {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+}
+
 .submit-btn {
     margin-top: 10px;
     margin-bottom: 10px;

@@ -9,14 +9,16 @@
   </head>
   <body>
     <div class="login-container">
-      <img src="../assets/logo.png" alt="Logo" class="logo">
-      <h2>Login</h2>
-      <p>Καλωσορίσατε στο Site της εργασίας μας για την Spotin.</p>
-      <input type="text" id="username" name="username">
-      
-      <input type="password" id="password" name="password">
-      
-      <button class="submit-btn" onclick="document.location='../home'">Login</button>
+      <form action="../home">
+        <img src="../assets/logo.png" alt="Logo" class="logo">
+        <h2>Login</h2>
+        <p>Καλωσορίσατε στο Site της εργασίας μας για την Spotin.</p>
+        <input type="text" id="username" name="username" autocomplete="username">
+
+        <input type="password" id="password" name="password" autocomplete="current-password">
+
+        <button type="submit" class="submit-btn">Login</button>
+      </form>
     </div>
     <script src="/bundle.js"></script>
   </body>
