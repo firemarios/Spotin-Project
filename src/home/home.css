@@ -28,6 +28,12 @@
     margin-bottom: 60px;
 }
 
+.recent-content {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+}
+
 #content-box {
     align-content: center;
     justify-items: center;
