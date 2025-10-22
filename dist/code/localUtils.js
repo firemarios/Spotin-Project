@@ -1,4 +1,17 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+const apiUrl = "http://127.0.0.1:8000/";
 export class localUtils {
+    static login(username, password) {
+        return loginLocal(username, password);
+    }
     static getFileIcon(fileName) {
         var _a;
         const ext = (_a = fileName.split('.').pop()) === null || _a === void 0 ? void 0 : _a.toLowerCase();
@@ -114,4 +127,17 @@ function pfpClicked() {
     subMenu === null || subMenu === void 0 ? void 0 : subMenu.classList.toggle('show-sub-menu');
 }
 window.pfpClicked = pfpClicked;
+function loginLocal(username, password) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const response = yield fetch(apiUrl + "login", {
+            method: 'POST',
+            body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
+        });
+        if (!response.ok) {
+            throw new Error(`Login failed: ${response.status} ${response.statusText}`);
+        }
+        return response;
+    });
+}
 //# sourceMappingURL=localUtils.js.map

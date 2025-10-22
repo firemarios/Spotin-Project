@@ -1,4 +1,9 @@
+const apiUrl = "http://127.0.0.1:8000/"
+
 export class localUtils {
+    static login(username: any, password: any) {
+        return loginLocal(username, password);
+    }
     public static getFileIcon(fileName: string): string {
         const ext = fileName.split('.').pop()?.toLowerCase();
         if (!ext) return 'fa fa-file';
@@ -115,3 +120,15 @@ function pfpClicked() {
     subMenu?.classList.toggle('show-sub-menu');
 }
 (window as any).pfpClicked = pfpClicked;
+
+async function loginLocal(username:string, password:string) {
+    const response = await fetch(apiUrl + "login", {
+    method: 'POST',
+    body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`,
+    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'} });   
+    if (!response.ok) {
+        throw new Error(`Login failed: ${response.status} ${response.statusText}`);
+    }
+
+    return response;
+}
