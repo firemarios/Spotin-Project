@@ -108,6 +108,47 @@ export class localUtils {
             </div>
             <script src="${inner ? "../../code/localUtils.js" : "../code/localUtils.js"}"></script>`;
     }
+    public static POST(url: string, headers: HeadersInit, body: any): Promise<any> {
+        console.log("POST Request to:", url);
+        console.log("With body:", body);
+        return fetch(url, {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify(body)
+        }).then(response => {
+            if (!response.ok) {
+                console.log("Response received:", response);
+                throw new Error(`HTTP error! status: ${response.status} ${response.statusText}`);
+            }
+            return response.json();
+        });
+    }
+    public static GET(url: string, headers: HeadersInit): Promise<any> {
+        return fetch(apiUrl + url, {
+            method: 'GET',
+            headers: headers
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        });
+    }
+    public static getCookie(name: string): string | null {
+        const cookies = document.cookie.split(';');
+
+        for (const cookie of cookies) {
+            const parts = cookie.trim().split('=');
+            const key = parts[0];
+            const value = parts[1] ?? null; // handle undefined safely
+
+            if (key === name && value !== null) {
+                return decodeURIComponent(value);
+            }
+        }
+
+        return null;
+    }
 }
 
 function logout(inner:boolean) {
@@ -129,6 +170,6 @@ async function loginLocal(username:string, password:string) {
     if (!response.ok) {
         throw new Error(`Login failed: ${response.status} ${response.statusText}`);
     }
-
-    return response;
+    document.cookie = `responce_code=${response.status}`;
+    return response.json();
 }

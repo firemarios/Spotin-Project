@@ -117,6 +117,45 @@ export class localUtils {
             </div>
             <script src="${inner ? "../../code/localUtils.js" : "../code/localUtils.js"}"></script>`;
     }
+    static POST(url, headers, body) {
+        console.log("POST Request to:", url);
+        console.log("With body:", body);
+        return fetch(url, {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify(body)
+        }).then(response => {
+            if (!response.ok) {
+                console.log("Response received:", response);
+                throw new Error(`HTTP error! status: ${response.status} ${response.statusText}`);
+            }
+            return response.json();
+        });
+    }
+    static GET(url, headers) {
+        return fetch(apiUrl + url, {
+            method: 'GET',
+            headers: headers
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        });
+    }
+    static getCookie(name) {
+        var _a;
+        const cookies = document.cookie.split(';');
+        for (const cookie of cookies) {
+            const parts = cookie.trim().split('=');
+            const key = parts[0];
+            const value = (_a = parts[1]) !== null && _a !== void 0 ? _a : null; // handle undefined safely
+            if (key === name && value !== null) {
+                return decodeURIComponent(value);
+            }
+        }
+        return null;
+    }
 }
 function logout(inner) {
     document.location = `${inner ? "../../login" : "../login"}`;
@@ -137,7 +176,8 @@ function loginLocal(username, password) {
         if (!response.ok) {
             throw new Error(`Login failed: ${response.status} ${response.statusText}`);
         }
-        return response;
+        document.cookie = `responce_code=${response.status}`;
+        return response.json();
     });
 }
 //# sourceMappingURL=localUtils.js.map

@@ -15,13 +15,15 @@ function login() {
         const password = (_b = document.getElementById("password")) === null || _b === void 0 ? void 0 : _b.value;
         if (username && password) {
             const response = yield localUtils.login(username, password);
-            if (response.status === 200) {
-                document.cookie = `access_token=${response.access_token}`;
-                document.cookie = `refresh_token=${response.refresh_token}`;
-                document.location = "../home";
-            }
+            document.cookie = `access_token=${response.access_token}; SameSite=Strict;`;
+            document.cookie = `refresh_token=${response.refresh_token}; SameSite=Strict;`;
+            document.cookie = `username=${username}; SameSite=Strict;`;
+            getUser();
         }
     });
 }
 window.login = login;
+function getUser() {
+    console.log(localUtils.GET("me", { "Authorization": "Bearer " + localUtils.getCookie("access_token") }));
+}
 //# sourceMappingURL=login.js.map

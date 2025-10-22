@@ -1,8 +1,11 @@
 export declare class localUtils {
-    static login(username: any, password: any): Promise<Response>;
+    static login(username: any, password: any): Promise<any>;
     static getFileIcon(fileName: string): string;
     static getFileIconColor(iconClass: string): string;
     static getSideBarHTML(inner: boolean): string;
     static getActionBarHTML(inner: boolean): string;
+    static POST(url: string, headers: HeadersInit, body: any): Promise<any>;
+    static GET(url: string, headers: HeadersInit): Promise<any>;
+    static getCookie(name: string): string | null;
 }
 //# sourceMappingURL=localUtils.d.ts.map
