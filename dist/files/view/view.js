@@ -1,5 +1,6 @@
 var _a;
 import { localUtils } from "../../code/localUtils.js";
+localUtils.verifyRenewToken(true);
 NavigatingTo();
 function NavigatingTo() {
     const actionBar = document.querySelector('.action-bar');

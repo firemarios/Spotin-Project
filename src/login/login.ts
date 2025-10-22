@@ -6,14 +6,17 @@ async function login() {
     
     if (username && password) {
         const response: any = await localUtils.login(username, password);
-        document.cookie = `access_token=${response.access_token}; SameSite=Strict;`
-        document.cookie = `refresh_token=${response.refresh_token}; SameSite=Strict;`
-        document.cookie = `username=${username}; SameSite=Strict;`
+        document.cookie = `access_token=${response.access_token}; SameSite=Lax; Path=/;`
+        document.cookie = `refresh_token=${response.refresh_token}; SameSite=Lax; Path=/;`
+        document.cookie = `username=${username}; SameSite=Lax; Path=/;`
         getUser();
 }
 }
 (window as any).login = login;
 
-function getUser() {    
-    console.log(localUtils.GET("me", {"Authorization": "Bearer " + localUtils.getCookie("access_token")}))
+async function getUser() {    
+    const response: any = await localUtils.GET("me", {"Authorization": "Bearer " + localUtils.getCookie("access_token")})
+    document.cookie = `name=${response.name}; SameSite=Lax; Path=/;`
+    document.cookie = `role=${response.role}; SameSite=Lax; Path=/;`
+    document.location = "../home"
 }

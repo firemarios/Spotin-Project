@@ -109,15 +109,12 @@ export class localUtils {
             <script src="${inner ? "../../code/localUtils.js" : "../code/localUtils.js"}"></script>`;
     }
     public static POST(url: string, headers: HeadersInit, body: any): Promise<any> {
-        console.log("POST Request to:", url);
-        console.log("With body:", body);
-        return fetch(url, {
+        return fetch(apiUrl + url, {
             method: 'POST',
             headers: headers,
             body: JSON.stringify(body)
         }).then(response => {
             if (!response.ok) {
-                console.log("Response received:", response);
                 throw new Error(`HTTP error! status: ${response.status} ${response.statusText}`);
             }
             return response.json();
@@ -134,24 +131,52 @@ export class localUtils {
             return response.json();
         });
     }
-    public static getCookie(name: string): string | null {
-        const cookies = document.cookie.split(';');
-
-        for (const cookie of cookies) {
-            const parts = cookie.trim().split('=');
-            const key = parts[0];
-            const value = parts[1] ?? null; // handle undefined safely
-
-            if (key === name && value !== null) {
-                return decodeURIComponent(value);
+    public static getCookie(cname:string) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+            let c = ca[i];
+            if (c)
+            while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+            }
+            if (c)
+            if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
             }
         }
+        return "";
+    }
+    public static async verifyRenewToken(inner: boolean) {
+    const access_token = localUtils.getCookie("access_token") ?? "0";
+    const refresh_token = localUtils.getCookie("refresh_token") ?? "0";
+    const response: any = await localUtils.POST("verify_token?token=" + access_token, {'accept': 'application/json'}, {});
 
-        return null;
+    if (response.valid) {
+        return true; // access token is fine
+    }
+
+    // access token not valid, check refresh token
+    const response2: any = await localUtils.POST("verify_token?token=" + refresh_token, {'accept': 'application/json'}, {});
+    
+    if (response2.valid && refresh_token !== undefined) {
+        // refresh token is valid → get new access token
+        const response3: any = await localUtils.POST("refresh?token=" + refresh_token, {'accept': 'application/json'}, {});
+        document.cookie = `access_token=${response3.access_token}; Path=/; SameSite=Lax;`;
+        document.cookie = `refresh_token=${response3.refresh_token}; Path=/; SameSite=Lax;`;
+        return true;
+    } else {
+        // refresh token invalid → logout
+        logout(inner);
+        return false;
+    }
     }
 }
 
 function logout(inner:boolean) {
+    document.cookie = `access_token=undefined; SameSite=Lax; Path=/;`
+    document.cookie = `refresh_token=undefined; SameSite=Lax; Path=/;`
     document.location=`${inner ? "../../login" : "../login"}`;
 }
 (window as any).logout = logout;
@@ -170,6 +195,5 @@ async function loginLocal(username:string, password:string) {
     if (!response.ok) {
         throw new Error(`Login failed: ${response.status} ${response.statusText}`);
     }
-    document.cookie = `responce_code=${response.status}`;
     return response.json();
 }

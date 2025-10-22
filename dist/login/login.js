@@ -15,15 +15,20 @@ function login() {
         const password = (_b = document.getElementById("password")) === null || _b === void 0 ? void 0 : _b.value;
         if (username && password) {
             const response = yield localUtils.login(username, password);
-            document.cookie = `access_token=${response.access_token}; SameSite=Strict;`;
-            document.cookie = `refresh_token=${response.refresh_token}; SameSite=Strict;`;
-            document.cookie = `username=${username}; SameSite=Strict;`;
+            document.cookie = `access_token=${response.access_token}; SameSite=Lax; Path=/;`;
+            document.cookie = `refresh_token=${response.refresh_token}; SameSite=Lax; Path=/;`;
+            document.cookie = `username=${username}; SameSite=Lax; Path=/;`;
             getUser();
         }
     });
 }
 window.login = login;
 function getUser() {
-    console.log(localUtils.GET("me", { "Authorization": "Bearer " + localUtils.getCookie("access_token") }));
+    return __awaiter(this, void 0, void 0, function* () {
+        const response = yield localUtils.GET("me", { "Authorization": "Bearer " + localUtils.getCookie("access_token") });
+        document.cookie = `name=${response.name}; SameSite=Lax; Path=/;`;
+        document.cookie = `role=${response.role}; SameSite=Lax; Path=/;`;
+        document.location = "../home";
+    });
 }
 //# sourceMappingURL=login.js.map

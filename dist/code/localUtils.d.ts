@@ -6,6 +6,7 @@ export declare class localUtils {
     static getActionBarHTML(inner: boolean): string;
     static POST(url: string, headers: HeadersInit, body: any): Promise<any>;
     static GET(url: string, headers: HeadersInit): Promise<any>;
-    static getCookie(name: string): string | null;
+    static getCookie(cname: string): string;
+    static verifyRenewToken(inner: boolean): Promise<boolean>;
 }
 //# sourceMappingURL=localUtils.d.ts.map

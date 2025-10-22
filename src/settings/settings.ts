@@ -1,5 +1,7 @@
 import { localUtils } from "../code/localUtils.js";
 
+localUtils.verifyRenewToken(false)
+
 NavigatingTo();
 
 function NavigatingTo() {

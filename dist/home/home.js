@@ -1,5 +1,9 @@
 import { localUtils } from "../code/localUtils.js";
+localUtils.verifyRenewToken(false);
 NavigatingTo();
+const username_text = document.getElementById("username-text");
+if (username_text)
+    username_text.textContent = localUtils.getCookie("name");
 function NavigatingTo() {
     const actionBar = document.querySelector('.action-bar');
     const pages = document.querySelector('.pages');
