@@ -1,5 +1,4 @@
-import { get } from "http";
-import { localUtils } from "../code/localUtils";
+import { localUtils } from "../code/localUtils.js";
 
 async function login() {
     const username = (document.getElementById("username") as HTMLInputElement | null)?.value;
