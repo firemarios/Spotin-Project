@@ -1,4 +1,5 @@
 import { localUtils } from "../../code/localUtils.js";
+import { apiUrl } from "../../code/localUtils.js";
 
 localUtils.verifyRenewToken(true)
 
@@ -10,11 +11,6 @@ function NavigatingTo() {
     const pages = document.querySelector('.pages');
     if (pages) {
         pages.innerHTML = localUtils.getSideBarHTML(true);
-        const tasks = document.getElementById('files');
-        if (tasks) {
-            tasks.removeAttribute('onclick');
-            tasks.classList.add('disabled');
-        }
     }
     if (actionBar) {
         actionBar.innerHTML = localUtils.getActionBarHTML(true);
@@ -35,6 +31,8 @@ async function getFile() {
         const descriptionElement = document.getElementById("description");
         if (fileNameElement && fileTypeElement && descriptionElement) {
             const responce: any = await localUtils.GET("files/" + file, {"Authorization": "Bearer " + localUtils.getCookie("access_token")});
+            if (responce.name == "Error")
+                document.location = "../";
             fileNameElement.textContent = responce.name;
             fileTypeElement.textContent = responce.name;
             if (responce.description)
@@ -73,5 +71,81 @@ async function download() {
     a.remove();
     URL.revokeObjectURL(url);
 }
-
 (window as any).download = download;
+
+function fileUpload(uploading : boolean) {
+    const upload_form = document.querySelector<HTMLElement>(".upload-form");
+
+    if (upload_form && uploading) {
+        upload_form.style.display = 'flex';
+    }
+    else if (upload_form && !(uploading)) {
+        upload_form.style.display = 'none';
+    }
+}
+(window as any).fileUpload = fileUpload;
+
+function replace() {
+    fileUpload(true);
+}
+(window as any).replace = replace;
+
+const progressBar = document.getElementById("uploadProgress") as HTMLProgressElement;
+const statusText = document.getElementById("status") as HTMLDivElement;
+
+async function uploadFileToServer() {
+    const fileInput = document.getElementById("file-upload") as HTMLInputElement;
+    const file = fileInput.files?.[0];
+    if (!file) {
+        statusText.textContent = "No file selected.";
+        return;
+    }
+
+    const hash = window.location.hash;
+    const filename = hash.startsWith("#/") ? hash.slice(2) : "";
+    const file_id = decodeURIComponent(filename);
+    const url = apiUrl + "files/replace/" + file_id;
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const xhr = new XMLHttpRequest();
+
+    xhr.upload.addEventListener("progress", (event) => {
+        if (event.lengthComputable) {
+            const percentComplete = (event.loaded / event.total) * 100;
+            progressBar.value = percentComplete;
+            statusText.textContent = `Uplitoading... ${Math.round(percentComplete)}%`;
+        }
+    });
+
+    xhr.addEventListener("load", () => {
+        if (xhr.status === 200) {
+            statusText.textContent = "Upload successful!";
+            progressBar.value = 100;
+            fileUpload(false); // Hide the upload form
+            getFile(); // Refresh the file info
+        } else {
+            statusText.textContent = `Upload failed: ${xhr.status} ${xhr.statusText}`;
+        }
+    });
+
+    xhr.addEventListener("error", () => {
+        statusText.textContent = "Upload failed due to network error.";
+    });
+
+    xhr.open("PUT", url);
+    xhr.setRequestHeader("Authorization", "Bearer " + localUtils.getCookie("access_token"));
+    xhr.send(formData);
+}
+(window as any).uploadFileToServer = uploadFileToServer;
+
+async function fdelete() {
+    const hash = window.location.hash;
+    const filename = hash.startsWith("#/") ? hash.slice(2) : "";
+    const file_id = decodeURIComponent(filename);
+
+    await localUtils.DELETE("files/delete/?file_id=" + file_id, { "Authorization": "Bearer " + localUtils.getCookie("access_token") })
+    getFile();
+}
+(window as any).fdelete = fdelete;

@@ -42,6 +42,12 @@
     border-radius: 10px;
     cursor: pointer;
     transition: 0.2s all;
+    overflow-x: hidden;
+}
+
+#file-name {
+    word-wrap: break-word;
+    width: 95%;
 }
 
 #content-box:hover {

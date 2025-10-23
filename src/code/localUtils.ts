@@ -1,4 +1,4 @@
-const apiUrl = "http://127.0.0.1:8000/"
+export const apiUrl = "http://127.0.0.1:8000/"
 
 export class localUtils {
     static login(username: any, password: any) {
@@ -100,7 +100,7 @@ export class localUtils {
     public static getActionBarHTML(inner:boolean): string {
         return `<img src="${inner ? "../../assets/logo.png" : "../assets/logo.png"}" alt="Logo" class="logo">
             <div>
-                <p>{n} People online</p>
+                <p id="peopleOnline"></p>
                 <img src="${inner ? "../../assets/user.png" : "../assets/user.png"}" alt="User" class="user-icon" onclick="pfpClicked()">
                 <div class="sub-menu">
                     <button onclick="logout(false)">Logout</button>
@@ -115,7 +115,19 @@ export class localUtils {
             body: JSON.stringify(body)
         }).then(response => {
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status} ${response.statusText}`);
+                return new Error(`HTTP error! status: ${response.status} ${response.statusText}`);
+            }
+            return response.json();
+        });
+    }
+    public static PUT(url: string, headers: HeadersInit, body: any): Promise<any> {
+        return fetch(apiUrl + url, {
+            method: 'PUT',
+            headers: headers,
+            body: JSON.stringify(body)
+        }).then(response => {
+            if (!response.ok) {
+                return new Error(`HTTP error! status: ${response.status} ${response.statusText}`);
             }
             return response.json();
         });
@@ -126,7 +138,18 @@ export class localUtils {
             headers: headers
         }).then(response => {
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                return new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        });
+    }
+    public static DELETE(url: string, headers: HeadersInit): Promise<any> {
+        return fetch(apiUrl + url, {
+            method: 'DELETE',
+            headers: headers
+        }).then(response => {
+            if (!response.ok) {
+                return new Error(`HTTP error! status: ${response.status}`);
             }
             return response.json();
         });
@@ -183,6 +206,16 @@ export class localUtils {
         return false;
     }
     }
+    public static async getPeopleOnline() {
+    const peopleOnline = document.getElementById("peopleOnline")
+    const responce:any = await localUtils.GET("users/online", {"Authorization": "Bearer " + localUtils.getCookie("access_token")})
+    if (peopleOnline) {
+        if (responce.length == 1)
+            peopleOnline.textContent = responce.length + " Person Online"
+        else
+            peopleOnline.textContent = responce.length + " People Online"
+    }
+}
 }
 
 function logout(inner:boolean) {

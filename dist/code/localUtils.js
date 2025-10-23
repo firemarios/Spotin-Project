@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const apiUrl = "http://127.0.0.1:8000/";
+export const apiUrl = "http://127.0.0.1:8000/";
 export class localUtils {
     static login(username, password) {
         return loginLocal(username, password);
@@ -109,7 +109,7 @@ export class localUtils {
     static getActionBarHTML(inner) {
         return `<img src="${inner ? "../../assets/logo.png" : "../assets/logo.png"}" alt="Logo" class="logo">
             <div>
-                <p>{n} People online</p>
+                <p id="peopleOnline"></p>
                 <img src="${inner ? "../../assets/user.png" : "../assets/user.png"}" alt="User" class="user-icon" onclick="pfpClicked()">
                 <div class="sub-menu">
                     <button onclick="logout(false)">Logout</button>
@@ -124,7 +124,19 @@ export class localUtils {
             body: JSON.stringify(body)
         }).then(response => {
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status} ${response.statusText}`);
+                return new Error(`HTTP error! status: ${response.status} ${response.statusText}`);
+            }
+            return response.json();
+        });
+    }
+    static PUT(url, headers, body) {
+        return fetch(apiUrl + url, {
+            method: 'PUT',
+            headers: headers,
+            body: JSON.stringify(body)
+        }).then(response => {
+            if (!response.ok) {
+                return new Error(`HTTP error! status: ${response.status} ${response.statusText}`);
             }
             return response.json();
         });
@@ -135,7 +147,18 @@ export class localUtils {
             headers: headers
         }).then(response => {
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                return new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        });
+    }
+    static DELETE(url, headers) {
+        return fetch(apiUrl + url, {
+            method: 'DELETE',
+            headers: headers
+        }).then(response => {
+            if (!response.ok) {
+                return new Error(`HTTP error! status: ${response.status}`);
             }
             return response.json();
         });
@@ -190,6 +213,18 @@ export class localUtils {
                 // refresh token invalid → logout
                 logout(inner);
                 return false;
+            }
+        });
+    }
+    static getPeopleOnline() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const peopleOnline = document.getElementById("peopleOnline");
+            const responce = yield localUtils.GET("users/online", { "Authorization": "Bearer " + localUtils.getCookie("access_token") });
+            if (peopleOnline) {
+                if (responce.length == 1)
+                    peopleOnline.textContent = responce.length + " Person Online";
+                else
+                    peopleOnline.textContent = responce.length + " People Online";
             }
         });
     }

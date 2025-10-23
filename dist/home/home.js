@@ -11,6 +11,7 @@ import { localUtils } from "../code/localUtils.js";
 localUtils.verifyRenewToken(false);
 NavigatingTo();
 getlatestFiles();
+getlatestTasks();
 const username_text = document.getElementById("username-text");
 if (username_text)
     username_text.textContent = localUtils.getCookie("name");
@@ -28,19 +29,50 @@ function NavigatingTo() {
     if (actionBar) {
         actionBar.innerHTML = localUtils.getActionBarHTML(false);
     }
+    localUtils.getPeopleOnline();
 }
 function getlatestFiles() {
     return __awaiter(this, void 0, void 0, function* () {
         const recent_content = document.querySelector('.recent-content');
         const response = yield localUtils.GET("files/latest", { "Authorization": "Bearer " + localUtils.getCookie("access_token") });
-        response.forEach((e) => {
-            if (recent_content)
-                recent_content.innerHTML += `<div id="content-box">
+        if (response.length != 0) {
+            response.forEach((e) => {
+                if (recent_content)
+                    recent_content.innerHTML += `<div id="content-box">
                                         <div id="file-type" file_id="${e.id}"></div>
                                         <p id="file-name">${e.name}</p>
                                     </div>`;
-        });
-        setIcons();
+            });
+            setIcons();
+        }
+        else if (recent_content) {
+            recent_content.textContent = "No Recent Content Available";
+            recent_content.style.fontStyle = "italic";
+            recent_content.style.color = "gray";
+        }
+    });
+}
+function getlatestTasks() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const current_tasks = document.querySelector('.current-tasks');
+        const response = yield localUtils.GET("tasks/latest", { "Authorization": "Bearer " + localUtils.getCookie("access_token") });
+        if (response.length != 0) {
+            response.forEach((e) => {
+                if (current_tasks)
+                    current_tasks.innerHTML += `<div id="task-box">
+                        <h3>{title}</h3>
+                        <p>Δημιουργία: {date}</p>
+                        <p>Προθεσμία: {date}</p>
+                        <p>Μέλος: {name}</p>
+                    </div>`;
+            });
+            setIcons();
+        }
+        else if (current_tasks) {
+            current_tasks.textContent = "No Tasks Available";
+            current_tasks.style.fontStyle = "italic";
+            current_tasks.style.color = "gray";
+        }
     });
 }
 function setIcons() {

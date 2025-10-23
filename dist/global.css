@@ -102,6 +102,23 @@ body {
     background-color: #c0c0c0;
 }
 
+button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    height: 40px;
+    border-radius: 5px;
+    border-color: transparent;
+    color: white;
+    background-color: #406792;
+    cursor: pointer;
+    transition: 0.2s all;
+}
+
+button:hover {
+    background-color: #305080;
+}
+
 .disabled {
     background-color: #b0b0b0 !important;
     cursor: default !important;

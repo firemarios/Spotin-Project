@@ -4,6 +4,7 @@ localUtils.verifyRenewToken(false)
 
 NavigatingTo();
 getlatestFiles();
+getlatestTasks();
 
 const username_text = document.getElementById("username-text");
 
@@ -24,11 +25,13 @@ function NavigatingTo() {
     if (actionBar) {
         actionBar.innerHTML = localUtils.getActionBarHTML(false);
     }
+    localUtils.getPeopleOnline();
 }
 
 async function getlatestFiles() {
-    const recent_content = document.querySelector('.recent-content');
+    const recent_content = document.querySelector<HTMLElement>('.recent-content');
     const response: any = await localUtils.GET("files/latest", {"Authorization": "Bearer " + localUtils.getCookie("access_token")})
+    if (response.length != 0) {
     response.forEach((e: any) => {
         if (recent_content)
         recent_content.innerHTML += `<div id="content-box">
@@ -37,6 +40,32 @@ async function getlatestFiles() {
                                     </div>`
     });
     setIcons();
+    } else if (recent_content) {
+        recent_content.textContent = "No Recent Content Available";
+        recent_content.style.fontStyle = "italic";
+        recent_content.style.color = "gray";
+    }
+}
+
+async function getlatestTasks() {
+    const current_tasks = document.querySelector<HTMLElement>('.current-tasks');
+    const response: any = await localUtils.GET("tasks/latest", {"Authorization": "Bearer " + localUtils.getCookie("access_token")})
+    if (response.length != 0) {
+    response.forEach((e: any) => {
+        if (current_tasks)
+        current_tasks.innerHTML += `<div id="task-box">
+                        <h3>{title}</h3>
+                        <p>Δημιουργία: {date}</p>
+                        <p>Προθεσμία: {date}</p>
+                        <p>Μέλος: {name}</p>
+                    </div>`
+    });
+    setIcons();
+    } else if (current_tasks) {
+        current_tasks.textContent = "No Tasks Available";
+        current_tasks.style.fontStyle = "italic";
+        current_tasks.style.color = "gray";
+    }
 }
 
 function setIcons() {
