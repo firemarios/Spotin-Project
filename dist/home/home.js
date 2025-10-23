@@ -36,7 +36,7 @@ function getlatestFiles() {
         response.forEach((e) => {
             if (recent_content)
                 recent_content.innerHTML += `<div id="content-box">
-                                        <div id="file-type" directory="${e.directory}"></div>
+                                        <div id="file-type" file_id="${e.id}"></div>
                                         <p id="file-name">${e.name}</p>
                                     </div>`;
         });
@@ -52,7 +52,7 @@ function setIcons() {
             const el = element;
             const name = file_names[index];
             const box = file_contentBox[index];
-            const directory = el.getAttribute('directory') || '';
+            const file_id = el.getAttribute('file_id') || '';
             if (name)
                 el.textContent = name.textContent;
             const iconClass = localUtils.getFileIcon(el.innerHTML);
@@ -61,7 +61,7 @@ function setIcons() {
             if (box)
                 box.onclick = () => {
                     if (name)
-                        document.location = "../files/view/#/" + directory + "/" + name.textContent;
+                        document.location = "../files/view/#/" + file_id;
                 };
         });
     }

@@ -131,6 +131,17 @@ export class localUtils {
             return response.json();
         });
     }
+    public static GETFile(url: string, headers: HeadersInit): Promise<any> {
+        return fetch(apiUrl + url, {
+            method: 'GET',
+            headers: headers
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.blob();
+        });
+    }
     public static getCookie(cname:string) {
         let name = cname + "=";
         let decodedCookie = decodeURIComponent(document.cookie);

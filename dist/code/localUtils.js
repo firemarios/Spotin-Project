@@ -140,6 +140,17 @@ export class localUtils {
             return response.json();
         });
     }
+    static GETFile(url, headers) {
+        return fetch(apiUrl + url, {
+            method: 'GET',
+            headers: headers
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.blob();
+        });
+    }
     static getCookie(cname) {
         let name = cname + "=";
         let decodedCookie = decodeURIComponent(document.cookie);
