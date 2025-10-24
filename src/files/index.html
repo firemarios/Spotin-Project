@@ -24,14 +24,22 @@
                 </div>
             </div>
         </div>
-        <div id="dropzone">
-            <label for="file-upload" class="custom-file-upload">
-                <div id="text">
-                    <span id="upload" class="material-symbols-outlined">upload</span>
-                </div> 
-                Upload File
-            </label>
-            <input id="file-upload" type="file" multiple />
+        <div class="upload-form">
+            <div id="dropzone">
+                <label for="file-upload" class="custom-file-upload">
+                    <div id="text">
+                        <span id="upload" class="material-symbols-outlined">upload</span>
+                    </div> 
+                    Upload File
+                </label>
+                <input id="file-upload" onchange="uploadFileToServer()" type="file" multiple />
+            </div>
+            <div id="file-form">
+                <p id="status">Uploading</p>
+                <progress id="uploadProgress" value="0" max="100"></progress>
+                <button onclick="fileUpload(false)">Cancel</button>
+                <button>Save</button>
+            </div>
         </div>
         <script type="module" src="files.js"></script>
         <style>@import url('../global.css');</style>

@@ -23,10 +23,13 @@
                     <table class="task-table">
                         <tr class="task-header">
                             <th>Όνομα</th>
+                            <th>Περιγραφή</th>
                             <th>Δημιουργία</th>
                             <th>Προθεσμία</th>
                             <th>Μέλος</th>
                             <th>Κατάσταση</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </table>
                 </div>
@@ -34,6 +37,7 @@
         </div>
         <div id="add-task-form" style="display: none;">
             <input type="text" class="task-name-input" placeholder="Όνομα εργασίας"/>
+            <input type="text" class="task-description-input" placeholder="Description"/>
             <input type="date" class="task-deadline-input"/>
             <select class="task-member-select">
                 <option value="" disabled selected>Εκχώρηση σε μέλος</option>
@@ -43,7 +47,7 @@
                 <option value="in-progress">Σε εξέλιξη</option>
                 <option value="completed">Ολοκληρώθηκε</option>
             </select>
-            <button class="submit-task-button">Προσθήκη Εργασίας</button>
+            <button class="submit-task-button" onclick="addTask()">Προσθήκη Εργασίας</button>
             <button class="cancel-task-button" onclick="closeForm()">Ακύρωση</button>
         </div>
         <script type="module" src="tasks.js"></script>

@@ -58,6 +58,8 @@ export class localUtils {
             case 'ppt':
             case 'pptx':
                 return 'fa fa-file-powerpoint';
+            case 'dir':
+                return 'fa fa-folder';
             default:
                 return 'fa fa-file';
         }
@@ -124,7 +126,7 @@ export class localUtils {
             body: JSON.stringify(body)
         }).then(response => {
             if (!response.ok) {
-                return new Error(`HTTP error! status: ${response.status} ${response.statusText}`);
+                return new Error(`HTTP error! status: ${response.status} ${response.statusText} ${response}`);
             }
             return response.json();
         });
@@ -194,6 +196,7 @@ export class localUtils {
     static verifyRenewToken(inner) {
         return __awaiter(this, void 0, void 0, function* () {
             var _a, _b;
+            localUtils.GET("me", { "Authorization": "Bearer " + localUtils.getCookie("access_token") });
             const access_token = (_a = localUtils.getCookie("access_token")) !== null && _a !== void 0 ? _a : "0";
             const refresh_token = (_b = localUtils.getCookie("refresh_token")) !== null && _b !== void 0 ? _b : "0";
             const response = yield localUtils.POST("verify_token?token=" + access_token, { 'accept': 'application/json' }, {});

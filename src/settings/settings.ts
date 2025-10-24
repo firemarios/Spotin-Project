@@ -18,4 +18,5 @@ function NavigatingTo() {
     if (actionBar) {
         actionBar.innerHTML = localUtils.getActionBarHTML(false);
     }
+    localUtils.getPeopleOnline();
 }

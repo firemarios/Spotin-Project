@@ -52,13 +52,18 @@ async function getlatestTasks() {
     const response: any = await localUtils.GET("tasks/latest", {"Authorization": "Bearer " + localUtils.getCookie("access_token")})
     if (response.length != 0) {
     response.forEach((e: any) => {
-        if (current_tasks)
-        current_tasks.innerHTML += `<div id="task-box">
-                        <h3>{title}</h3>
-                        <p>Δημιουργία: {date}</p>
-                        <p>Προθεσμία: {date}</p>
-                        <p>Μέλος: {name}</p>
-                    </div>`
+        e.assignees.forEach((c:any) => {
+            if (current_tasks) {
+            let create_date:string = e.created_date;
+            create_date = create_date.substring(0,10);
+            current_tasks.innerHTML += `<div id="task-box">
+                            <h3>${e.name}</h3>
+                            <p>Δημιουργία: ${create_date}</p>
+                            <p>Προθεσμία: ${e.due_date}</p>
+                            <p>Μέλος: ${c.name}</p>
+                        </div>`
+            }
+        });
     });
     setIcons();
     } else if (current_tasks) {

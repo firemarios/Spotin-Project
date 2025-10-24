@@ -24,6 +24,7 @@ function NavigatingTo() {
         innerHTML = innerHTML.replace("false", "true");
         actionBar.innerHTML = innerHTML;
     }
+    localUtils.getPeopleOnline();
 }
 function getFile() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -104,7 +105,7 @@ function uploadFileToServer() {
         const hash = window.location.hash;
         const filename = hash.startsWith("#/") ? hash.slice(2) : "";
         const file_id = decodeURIComponent(filename);
-        const url = apiUrl + "files/replace/" + file_id;
+        const url = apiUrl + "files/replace/";
         const formData = new FormData();
         formData.append("file", file);
         const xhr = new XMLHttpRequest();

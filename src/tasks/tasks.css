@@ -126,6 +126,10 @@ th, td {
     transition: background-color 0.3s ease;
 }
 
+button {
+    width: 100px;
+}
+
 .cancel-task-button {
     background-color: #b91d1d;
     color: white;

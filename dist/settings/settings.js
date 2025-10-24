@@ -15,5 +15,6 @@ function NavigatingTo() {
     if (actionBar) {
         actionBar.innerHTML = localUtils.getActionBarHTML(false);
     }
+    localUtils.getPeopleOnline();
 }
 //# sourceMappingURL=settings.js.map

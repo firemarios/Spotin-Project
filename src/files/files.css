@@ -48,18 +48,10 @@
 
 #dropzone {
     background-color: white;
-    position: absolute;
-    justify-self: center;
-    top: 30%;
-    display: none;
     flex-direction: row;
-    width: 300px;
-    height: 200px;
-    border-radius: 10px;
     align-items: top;
     justify-content: center;
     text-align: left;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 #dropzone label {
@@ -92,9 +84,42 @@ input[type="file"] {
   font-family: Arial, sans-serif;
 }
 
-/* #upload {
-    margin-right: 150px;
-} */
+.upload-form {
+    flex-direction: column;
+    position: absolute;
+    align-self: center;
+    justify-self: center;
+    top: 180px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    height: 300px;
+    width: 200px;
+    justify-items: center;
+    padding-top: 80px;
+    text-align: center;
+    display: none;
+}
+
+input[type="text"] {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #e0e0e0;
+    text-wrap: balance;
+}
+
+.upload-form button {
+    width: 80px;
+}
+
+#file-form {
+   margin-top: 80px; 
+}
 
 .add-file-button {
     position: fixed;
@@ -124,6 +149,12 @@ input[type="file"] {
     border-radius: 10px;
     cursor: pointer;
     transition: 0.2s all;
+    overflow-x: hidden;
+}
+
+#file-name {
+    word-wrap: break-word;
+    width: 95%;
 }
 
 #content-box:hover {
