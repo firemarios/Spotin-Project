@@ -1,4 +1,4 @@
-export declare const apiUrl = "http://127.0.0.1:8000/";
+export declare const apiUrl = "https://fireblocksmp.sdesignshost.gr:25575/";
 export declare class localUtils {
     static login(username: any, password: any): Promise<any>;
     static getFileIcon(fileName: string): string;

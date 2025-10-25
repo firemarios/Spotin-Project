@@ -1,4 +1,4 @@
-export const apiUrl = "http://127.0.0.1:8000/"
+export const apiUrl = "https://fireblocksmp.sdesignshost.gr:25575/"
 
 export class localUtils {
     static login(username: any, password: any) {

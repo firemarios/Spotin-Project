@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-export const apiUrl = "http://127.0.0.1:8000/";
+export const apiUrl = "https://fireblocksmp.sdesignshost.gr:25575/";
 export class localUtils {
     static login(username, password) {
         return loginLocal(username, password);
