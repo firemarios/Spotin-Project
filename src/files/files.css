@@ -24,13 +24,26 @@
     height: 100vh;
 }
 
+#folders {
+    height: min-content;
+}
+
+#folders span {
+    margin-right: 10px;
+}
+
+#folders span:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}
+
 #file-viewer {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 20px;
     padding: 10px;
     border-radius: 10px;
-    max-height: 65vh;
+    max-height: 60vh;
     overflow-y: auto
 }
 

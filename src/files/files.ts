@@ -4,6 +4,7 @@ const hash = window.location.hash;
 const dir = hash.startsWith("#/") ? hash.slice(2) : "";
 
 localUtils.verifyRenewToken(false)
+localUtils.startHashWatcher();
 
 NavigatingTo();
 getFilesAndDirectories();
@@ -73,8 +74,11 @@ function setIcons() {
             if (box)
 
             box.onclick = () => {
-                if (dir) {
+                if (dir && !(hash.startsWith("#/"))) {
                     document.location = "../files/#/" + dir;
+                    location.reload();
+                } else if (dir && hash.startsWith("#/")) {
+                    document.location = document.location + "/" + dir;
                     location.reload();
                 }
                 else {
@@ -111,7 +115,7 @@ async function uploadFileToServer() {
     const hash = window.location.hash;
     const filename = hash.startsWith("#/") ? hash.slice(2) : "";
     const file_id = decodeURIComponent(filename);
-    const url = apiUrl + "files/upload/";
+    const url = apiUrl + `files/upload/?directory=${dir}`;
 
     const formData = new FormData();
     formData.append("file", file);
@@ -146,3 +150,22 @@ async function uploadFileToServer() {
     xhr.send(formData);
 }
 (window as any).uploadFileToServer = uploadFileToServer;
+
+async function addDir() {
+    const name = prompt("Enter Directory Name:", "")
+    if (name) {
+        await localUtils.POST(`addDirectory/?current_path=${dir}`, { "Authorization": "Bearer " + localUtils.getCookie("access_token"), 'Content-Type': 'application/json' }, {name: name})
+        location.reload();
+    }
+}
+(window as any).addDir = addDir;
+
+async function deleteDir() {
+    if (hash.startsWith("#/"))
+        if (confirm("Do you want to delete this directory and its contents?")) {
+            await localUtils.DELETE(`deleteDirectory/?directory=${dir}`, { "Authorization": "Bearer " + localUtils.getCookie("access_token") })
+            document.location = "./"
+
+        }
+}
+(window as any).deleteDir = deleteDir;

@@ -20,18 +20,23 @@
             <div class="main" ondragenter="console.log('yes')">
                 <div class="users-title">
                     <h3>Users</h3>
-                    <span id="add" class="material-symbols-outlined">add</span>
+                    <span id="add" class="material-symbols-outlined" onclick="openForm()">add</span>
                 </div>
                 <div id="users">
-                    <div id="user">
-                        <p>{name}</p>
-                        <div class="actions">
-                            <span id="edit" class="material-symbols-outlined">edit</span>
-                            <span id="delete" class="material-symbols-outlined">delete</span>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
+        </div>
+        <div id="add-user-form" style="display: none;">
+            <input type="text" class="user-username-input" placeholder="Username"/>
+            <input type="text" class="user-name-input" placeholder="Όνομα"/>
+            <input type="text" class="user-password-input" placeholder="Κωδικός"/>
+            <select class="user-role-select">
+                <option value="user">Χρήστης</option>
+                <option value="admin">Admin</option>
+            </select>
+            <button class="submit-user-button" edit="" onclick="addUser()">Εντάξει</button>
+            <button class="cancel-user-button" onclick="closeForm()">Ακύρωση</button>
         </div>
         <script type="module" src="settings.js"></script>
         <style>@import url('../global.css');</style>

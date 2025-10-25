@@ -60,11 +60,11 @@ function getFile() {
         }
     });
 }
+const hash = window.location.hash;
+const filename = hash.startsWith("#/") ? hash.slice(2) : "";
+const file_id = decodeURIComponent(filename);
 function download() {
     return __awaiter(this, void 0, void 0, function* () {
-        const hash = window.location.hash;
-        const filename = hash.startsWith("#/") ? hash.slice(2) : "";
-        const file_id = decodeURIComponent(filename);
         const blob = yield localUtils.GETFile("files/download/" + file_id, { "Authorization": "Bearer " + localUtils.getCookie("access_token") });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -146,4 +146,12 @@ function fdelete() {
     });
 }
 window.fdelete = fdelete;
+function save() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const description = document.getElementById("descriptionIn");
+        yield localUtils.PUT(`files/modify/?file_id=${file_id}`, { "Authorization": "Bearer " + localUtils.getCookie("access_token"), "Content-Type": "application/json" }, { description: description.value });
+        location.reload();
+    });
+}
+window.save = save;
 //# sourceMappingURL=view.js.map

@@ -11,6 +11,7 @@ import { apiUrl, localUtils } from "../code/localUtils.js";
 const hash = window.location.hash;
 const dir = hash.startsWith("#/") ? hash.slice(2) : "";
 localUtils.verifyRenewToken(false);
+localUtils.startHashWatcher();
 NavigatingTo();
 getFilesAndDirectories();
 function NavigatingTo() {
@@ -72,8 +73,12 @@ function setIcons() {
                 name.textContent = ((_a = name.textContent.split('.')[0]) === null || _a === void 0 ? void 0 : _a.toLowerCase()) || '';
             if (box)
                 box.onclick = () => {
-                    if (dir) {
+                    if (dir && !(hash.startsWith("#/"))) {
                         document.location = "../files/#/" + dir;
+                        location.reload();
+                    }
+                    else if (dir && hash.startsWith("#/")) {
+                        document.location = document.location + "/" + dir;
                         location.reload();
                     }
                     else {
@@ -107,7 +112,7 @@ function uploadFileToServer() {
         const hash = window.location.hash;
         const filename = hash.startsWith("#/") ? hash.slice(2) : "";
         const file_id = decodeURIComponent(filename);
-        const url = apiUrl + "files/upload/";
+        const url = apiUrl + `files/upload/?directory=${dir}`;
         const formData = new FormData();
         formData.append("file", file);
         const xhr = new XMLHttpRequest();
@@ -138,4 +143,24 @@ function uploadFileToServer() {
     });
 }
 window.uploadFileToServer = uploadFileToServer;
+function addDir() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const name = prompt("Enter Directory Name:", "");
+        if (name) {
+            yield localUtils.POST(`addDirectory/?current_path=${dir}`, { "Authorization": "Bearer " + localUtils.getCookie("access_token"), 'Content-Type': 'application/json' }, { name: name });
+            location.reload();
+        }
+    });
+}
+window.addDir = addDir;
+function deleteDir() {
+    return __awaiter(this, void 0, void 0, function* () {
+        if (hash.startsWith("#/"))
+            if (confirm("Do you want to delete this directory and its contents?")) {
+                yield localUtils.DELETE(`deleteDirectory/?directory=${dir}`, { "Authorization": "Bearer " + localUtils.getCookie("access_token") });
+                document.location = "./";
+            }
+    });
+}
+window.deleteDir = deleteDir;
 //# sourceMappingURL=files.js.map

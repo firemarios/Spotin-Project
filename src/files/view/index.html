@@ -27,7 +27,7 @@
                 <p id="description"></p>
                 <div id="actions">
                     <button id="download-btn" onclick="download()">Download</button>
-                    <button id="replace-btn" onclick="replace()">Replace</button>
+                    <button id="replace-btn" onclick="replace()">Modify</button>
                     <button id="delete-btn" onclick="fdelete()">Delete</button>
                 </div>               
             </div>
@@ -45,8 +45,9 @@
             <div id="file-form">
                 <p id="status">Uploading</p>
                 <progress id="uploadProgress" value="0" max="100"></progress>
+                <input id="descriptionIn" type="text" placeholder="Description">
                 <button onclick="fileUpload(false)">Cancel</button>
-                <button>Save</button>
+                <button onclick="save()">Save</button>
             </div>
         </div>
         <script type="module" src="view.js"></script>

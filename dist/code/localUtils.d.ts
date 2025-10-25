@@ -13,5 +13,6 @@ export declare class localUtils {
     static getCookie(cname: string): string;
     static verifyRenewToken(inner: boolean): Promise<boolean>;
     static getPeopleOnline(): Promise<void>;
+    static startHashWatcher(): void;
 }
 //# sourceMappingURL=localUtils.d.ts.map

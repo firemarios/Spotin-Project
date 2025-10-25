@@ -91,22 +91,24 @@ export class localUtils {
         }
     }
     static getSideBarHTML(inner) {
-        return `<div class="page" id="home" onclick="document.location='${inner ? "../../home" : "../home"}'">
-                    <span class="material-symbols-outlined">home</span>
-                    <p>Αρχική</p>
-                </div>
-                <div class="page" id="tasks" onclick="document.location='${inner ? "../../tasks" : "../tasks"}'">
-                    <span class="material-symbols-outlined">assignment</span>
-                    <p>Εργασίες</p>
-                </div>
-                <div class="page" id="files" onclick="document.location='${inner ? "../../files" : "../files"}'">
-                    <span class="material-symbols-outlined">files</span>
-                    <p>Αρχεία</p>
-                </div>
-                <div class="page" id="settings" onclick="document.location='${inner ? "../../settings" : "../settings"}'">
-                    <span class="material-symbols-outlined">settings</span>
-                    <p>Ρυθμίσεις</p>
-                </div>`;
+        let sidebar = `<div class="page" id="home" onclick="document.location='${inner ? "../../home" : "../home"}'">
+                            <span class="material-symbols-outlined">home</span>
+                            <p>Αρχική</p>
+                        </div>
+                        <div class="page" id="tasks" onclick="document.location='${inner ? "../../tasks" : "../tasks"}'">
+                            <span class="material-symbols-outlined">assignment</span>
+                            <p>Εργασίες</p>
+                        </div>
+                        <div class="page" id="files" onclick="document.location='${inner ? "../../files" : "../files"}'">
+                            <span class="material-symbols-outlined">files</span>
+                            <p>Αρχεία</p>
+                        </div>`;
+        if (localUtils.getCookie("role") == "admin")
+            sidebar += `<div class="page" id="settings" onclick="document.location='${inner ? "../../settings" : "../settings"}'">
+                            <span class="material-symbols-outlined">settings</span>
+                            <p>Ρυθμίσεις</p>
+                        </div>`;
+        return sidebar;
     }
     static getActionBarHTML(inner) {
         return `<img src="${inner ? "../../assets/logo.png" : "../assets/logo.png"}" alt="Logo" class="logo">
@@ -228,6 +230,16 @@ export class localUtils {
                     peopleOnline.textContent = responce.length + " Person Online";
                 else
                     peopleOnline.textContent = responce.length + " People Online";
+            }
+        });
+    }
+    static startHashWatcher() {
+        let lastHash = location.hash;
+        window.addEventListener("hashchange", () => {
+            const newHash = location.hash;
+            if (newHash !== lastHash) {
+                location.reload();
+                lastHash = newHash;
             }
         });
     }

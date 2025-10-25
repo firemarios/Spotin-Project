@@ -6,6 +6,7 @@ const task_description_input = document.querySelector<HTMLInputElement>(".task-d
 const task_deadline_input = document.querySelector<HTMLInputElement>(".task-deadline-input")
 const task_status_select = document.querySelector<HTMLInputElement>(".task-status-select")
 const task_table = document.querySelector<HTMLElement>(".task-table")
+const addbtn = document.querySelector(".submit-task-button")
 
 localUtils.verifyRenewToken(false)
 
@@ -42,6 +43,7 @@ function closeForm() {
     const addTaskForm = document.getElementById('add-task-form');
     if (addTaskForm) {
         addTaskForm.style.display = 'none';
+        addbtn?.setAttribute("edit", "0");
     }
 }
 (window as any).closeForm = closeForm;
@@ -56,14 +58,41 @@ async function getUsers() {
 }
 
 async function addTasks() {
+    const edit = addbtn?.getAttribute("edit")
     const selectedOption = task_member_select?.selectedOptions[0];
     const userId = selectedOption?.getAttribute("user_id");
-    if (userId)
+    const task_id = addbtn?.getAttribute("task_id")
+    if (userId && !(edit))
         await localUtils.POST("addTask", {"Authorization": "Bearer " + localUtils.getCookie("access_token"), "Content-Type": "application/json"}, {name: task_name_input?.value, description: task_description_input?.value, status: task_status_select?.value, assignee_id: parseInt(userId), due_date: task_deadline_input?.value})
         closeForm();
         location.reload();
+    if (userId && edit)
+        await localUtils.PUT(`tasks/${task_id}`, {"Authorization": "Bearer " + localUtils.getCookie("access_token"), "Content-Type": "application/json"}, {name: task_name_input?.value, description: task_description_input?.value, status: task_status_select?.value, assignee_id: parseInt(userId), due_date: task_deadline_input?.value})
+        closeForm();
+        location.reload();
+    addbtn?.setAttribute("edit", "0");
 }
 (window as any).addTask = addTasks;
+
+async function modifyTask(task_id:number) {
+    addbtn?.setAttribute("edit", "1");
+    addbtn?.setAttribute("task_id", task_id.toString());
+    const responce:any = await localUtils.GET(`tasks/${task_id}`, {"Authorization": "Bearer " + localUtils.getCookie("access_token")})
+    addBtnClicked();
+    responce.assignees.forEach((e:any) => {
+        if (task_member_select)
+            task_member_select.selectedIndex = e.id;
+    });
+    if (task_deadline_input)
+        task_deadline_input.value = responce.due_date.split("-").reverse().join("-");
+    if (task_status_select)
+        task_status_select.value = responce.status;
+    if (task_description_input)
+        task_description_input.value = responce.description;
+    if (task_name_input)
+        task_name_input.value = responce.name;
+}
+(window as any).modifyTask = modifyTask;
 
 async function getTasks() {
     const responce:any = await localUtils.GET("tasks/?", {"Authorization": "Bearer " + localUtils.getCookie("access_token")})
@@ -84,7 +113,7 @@ async function getTasks() {
                                             <td>${e.due_date}</td>
                                             <td>${c.name}</td>
                                             <td>${e.status}</td>
-                                            <td><button>Edit</button></td>
+                                            <td><button onclick="modifyTask(${e.id})">Edit</button></td>
                                             <td><button onclick="deleteTask(${e.id})">Delete</button></td>
                                         </tr>`
                 }

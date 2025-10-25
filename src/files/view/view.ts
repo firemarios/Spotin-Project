@@ -55,11 +55,11 @@ async function getFile() {
     }
 }
 
-async function download() {
-    const hash = window.location.hash;
-    const filename = hash.startsWith("#/") ? hash.slice(2) : "";
-    const file_id = decodeURIComponent(filename);
+const hash = window.location.hash;
+const filename = hash.startsWith("#/") ? hash.slice(2) : "";
+const file_id = decodeURIComponent(filename);
 
+async function download() {
     const blob = await localUtils.GETFile("files/download/" + file_id, { "Authorization": "Bearer " + localUtils.getCookie("access_token") });
 
     const url = URL.createObjectURL(blob);
@@ -150,3 +150,10 @@ async function fdelete() {
     getFile();
 }
 (window as any).fdelete = fdelete;
+
+async function save() {
+    const description = document.getElementById("descriptionIn") as HTMLInputElement;
+    await localUtils.PUT(`files/modify/?file_id=${file_id}`, { "Authorization": "Bearer " + localUtils.getCookie("access_token"), "Content-Type": "application/json" }, {description: description.value})
+    location.reload();
+}
+(window as any).save = save;
