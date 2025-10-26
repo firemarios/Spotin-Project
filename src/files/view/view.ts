@@ -116,7 +116,7 @@ async function uploadFileToServer() {
         if (event.lengthComputable) {
             const percentComplete = (event.loaded / event.total) * 100;
             progressBar.value = percentComplete;
-            statusText.textContent = `Uplitoading... ${Math.round(percentComplete)}%`;
+            statusText.textContent = `Uploading... ${Math.round(percentComplete)}%`;
         }
     });
 
