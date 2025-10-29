@@ -76,3 +76,9 @@ form {
 .submit-btn:hover {
     background-color: #305080;
 }
+
+#show {
+    color: white;
+    cursor: pointer;
+    text-decoration: underline;
+}

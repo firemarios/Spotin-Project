@@ -30,8 +30,9 @@
 
 .recent-content {
     display: flex;
+    flex-direction: row;
     gap: 10px;
-    overflow-x: auto;
+    flex-wrap: wrap;
 }
 
 #content-box {
@@ -59,6 +60,10 @@
     background-color: transparent;
 }
 
+#current-tasks {
+    overflow-x: auto;
+}
+
 #task-box {
     align-items: center;
     background-color: #d0d0d0;
@@ -71,6 +76,8 @@
     gap: 10px;
     transition: 0.2s all;
     margin-bottom: 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
 #task-box:hover {

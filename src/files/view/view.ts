@@ -157,3 +157,8 @@ async function save() {
     location.reload();
 }
 (window as any).save = save;
+
+function preview() {
+    window.open("../preview#/" + file_id)
+}
+(window as any).preview = preview;

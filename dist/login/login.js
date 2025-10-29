@@ -31,4 +31,17 @@ function getUser() {
         document.location = "../home";
     });
 }
+function showPass() {
+    const show = (document.getElementById("show"));
+    const password = document.getElementById("password");
+    if (password.type == "password" && show) {
+        password.type = 'text';
+        show.innerHTML = "Hide Password";
+    }
+    else if (password.type == "text" && show) {
+        password.type = 'password';
+        show.innerHTML = "Show Password";
+    }
+}
+window.showPass = showPass;
 //# sourceMappingURL=login.js.map

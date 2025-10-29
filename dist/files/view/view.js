@@ -154,4 +154,8 @@ function save() {
     });
 }
 window.save = save;
+function preview() {
+    window.open("../preview#/" + file_id);
+}
+window.preview = preview;
 //# sourceMappingURL=view.js.map

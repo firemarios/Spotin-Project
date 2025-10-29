@@ -20,3 +20,17 @@ async function getUser() {
     document.cookie = `role=${response.role}; SameSite=Lax; Path=/;`
     document.location = "../home"
 }
+
+function showPass() {
+    const show = (document.getElementById("show"));
+    const password = (document.getElementById("password") as HTMLInputElement);
+
+    if (password.type == "password" && show) {
+        password.type = 'text'
+        show.innerHTML = "Hide Password"
+    } else if (password.type == "text" && show) {
+        password.type = 'password'
+        show.innerHTML = "Show Password"
+    }
+}
+(window as any).showPass = showPass;
