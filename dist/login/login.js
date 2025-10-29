@@ -14,11 +14,20 @@ function login() {
         const username = (_a = document.getElementById("username")) === null || _a === void 0 ? void 0 : _a.value;
         const password = (_b = document.getElementById("password")) === null || _b === void 0 ? void 0 : _b.value;
         if (username && password) {
-            const response = yield localUtils.login(username, password);
-            document.cookie = `access_token=${response.access_token}; SameSite=Lax; Path=/;`;
-            document.cookie = `refresh_token=${response.refresh_token}; SameSite=Lax; Path=/;`;
-            document.cookie = `username=${username}; SameSite=Lax; Path=/;`;
-            getUser();
+            try {
+                const response = yield localUtils.login(username, password);
+                if (response.access_token && response.refresh_token) {
+                    document.cookie = `access_token=${response.access_token}; SameSite=Lax; Path=/;`;
+                    document.cookie = `refresh_token=${response.refresh_token}; SameSite=Lax; Path=/;`;
+                    document.cookie = `username=${username}; SameSite=Lax; Path=/;`;
+                    alertify.success("Loged In!");
+                }
+                getUser();
+            }
+            catch (error) {
+                console.error(error);
+                alertify.error((error === null || error === void 0 ? void 0 : error.message) || String(error));
+            }
         }
     });
 }

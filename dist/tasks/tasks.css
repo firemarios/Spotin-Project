@@ -100,7 +100,6 @@ th, td {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: 0.5s all;
-    background: #446CB3;
 }
 
 #add-task-form input, #add-task-form textarea {

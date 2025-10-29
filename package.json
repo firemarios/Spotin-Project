@@ -16,6 +16,8 @@
   "devDependencies": {
     "@types/node": "^24.8.0",
     "copyfiles": "^2.4.1",
+    "css-loader": "^7.1.2",
+    "style-loader": "^4.0.0",
     "ts-loader": "^9.5.4",
     "typescript": "^5.9.3",
     "webpack": "^5.102.1",
@@ -24,8 +26,10 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^7.1.0",
+    "alertifyjs": "^1.14.0",
     "file-icons": "^0.0.0",
     "file-icons-js": "github:websemantics/file-icons-js",
+    "jquery": "^3.6.0",
     "toastr": "^2.1.4"
   }
 }

@@ -128,7 +128,7 @@ export class localUtils {
             body: JSON.stringify(body)
         }).then(response => {
             if (!response.ok) {
-                return new Error(`HTTP error! status: ${response.status} ${response.statusText} ${response}`);
+                throw new Error(`HTTP error! status: ${response.status} ${response.statusText} ${response}`);
             }
             return response.json();
         });
@@ -140,7 +140,7 @@ export class localUtils {
             body: JSON.stringify(body)
         }).then(response => {
             if (!response.ok) {
-                return new Error(`HTTP error! status: ${response.status} ${response.statusText}`);
+                throw new Error(`HTTP error! status: ${response.status} ${response.statusText}`);
             }
             return response.json();
         });
@@ -151,7 +151,7 @@ export class localUtils {
             headers: headers
         }).then(response => {
             if (!response.ok) {
-                return new Error(`HTTP error! status: ${response.status}`);
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
             return response.json();
         });
@@ -162,7 +162,7 @@ export class localUtils {
             headers: headers
         }).then(response => {
             if (!response.ok) {
-                return new Error(`HTTP error! status: ${response.status}`);
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
             return response.json();
         });
