@@ -147,6 +147,7 @@ async function fdelete() {
     const file_id = decodeURIComponent(filename);
 
     await localUtils.DELETE("files/delete/?file_id=" + file_id, { "Authorization": "Bearer " + localUtils.getCookie("access_token") })
+    location.reload();
     getFile();
 }
 (window as any).fdelete = fdelete;

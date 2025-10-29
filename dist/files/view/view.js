@@ -142,6 +142,7 @@ function fdelete() {
         const filename = hash.startsWith("#/") ? hash.slice(2) : "";
         const file_id = decodeURIComponent(filename);
         yield localUtils.DELETE("files/delete/?file_id=" + file_id, { "Authorization": "Bearer " + localUtils.getCookie("access_token") });
+        location.reload();
         getFile();
     });
 }
