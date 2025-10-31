@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import { localUtils } from "../../code/localUtils.js";
 import { apiUrl } from "../../code/localUtils.js";
 localUtils.verifyRenewToken(true);
+let file_name;
 NavigatingTo();
 getFile();
 function NavigatingTo() {
@@ -32,8 +33,8 @@ function getFile() {
         const filename = hash.startsWith("#/") ? hash.slice(2) : "";
         if (filename) {
             const file = decodeURIComponent(filename);
-            const fileNameElement = document.getElementById("file-name");
             const fileTypeElement = document.getElementById("file-type");
+            const fileNameElement = document.getElementById("file-name");
             const descriptionElement = document.getElementById("description");
             if (fileNameElement && fileTypeElement && descriptionElement) {
                 const responce = yield localUtils.GET("files/" + file, { "Authorization": "Bearer " + localUtils.getCookie("access_token") });
@@ -48,6 +49,7 @@ function getFile() {
                     descriptionElement.style.fontStyle = "italic";
                     descriptionElement.style.color = "gray";
                 }
+                file_name = fileTypeElement === null || fileTypeElement === void 0 ? void 0 : fileTypeElement.innerHTML;
             }
             if (fileTypeElement) {
                 const iconClass = localUtils.getFileIcon(fileTypeElement.innerHTML);
@@ -156,7 +158,17 @@ function save() {
 }
 window.save = save;
 function preview() {
-    window.open("../preview#/" + file_id);
+    return __awaiter(this, void 0, void 0, function* () {
+        var _a;
+        const ext = (_a = file_name === null || file_name === void 0 ? void 0 : file_name.split('.').pop()) === null || _a === void 0 ? void 0 : _a.toLowerCase();
+        if (ext == "link") {
+            const responce = yield localUtils.GETFileContent(`files/download/${file_id}`, { "Authorization": "Bearer " + localUtils.getCookie("access_token") });
+            window.open(responce);
+        }
+        else {
+            window.open("../preview#/" + file_id);
+        }
+    });
 }
 window.preview = preview;
 //# sourceMappingURL=view.js.map

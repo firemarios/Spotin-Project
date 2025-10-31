@@ -62,8 +62,7 @@ function setIcons() {
             const dir = el.getAttribute('dir') || '';
 
             if (name)
-
-            el.textContent = name.textContent;
+                el.textContent = name.textContent;
 
             const iconClass = localUtils.getFileIcon(el.innerHTML);
             el.innerHTML = `<i class="${iconClass}"></i>`;
@@ -73,17 +72,17 @@ function setIcons() {
 
             if (box)
 
-            box.onclick = () => {
+            box.onclick = async () => {
                 if (dir && !(hash.startsWith("#/"))) {
-                    document.location = "../files/#/" + dir;
-                    location.reload();
+                        document.location = "../files/#/" + dir;
+                        location.reload();
                 } else if (dir && hash.startsWith("#/")) {
                     document.location = document.location + "/" + dir;
                     location.reload();
-                }
-                else {
+                } else {
                     document.location = "../files/view/#/" + file_id;
                 }
+                
             };
         });
     }

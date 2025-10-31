@@ -3,6 +3,8 @@ import { apiUrl } from "../../code/localUtils.js";
 
 localUtils.verifyRenewToken(true)
 
+let file_name: string | undefined;
+
 NavigatingTo();
 getFile();
 
@@ -27,8 +29,8 @@ async function getFile() {
 
     if (filename) {
         const file = decodeURIComponent(filename);
-        const fileNameElement = document.getElementById("file-name");
         const fileTypeElement = document.getElementById("file-type");
+        const fileNameElement = document.getElementById("file-name");
         const descriptionElement = document.getElementById("description");
         if (fileNameElement && fileTypeElement && descriptionElement) {
             const responce: any = await localUtils.GET("files/" + file, {"Authorization": "Bearer " + localUtils.getCookie("access_token")});
@@ -43,6 +45,7 @@ async function getFile() {
                 descriptionElement.style.fontStyle = "italic";
                 descriptionElement.style.color = "gray";
             }
+            file_name = fileTypeElement?.innerHTML;
         }
         if (fileTypeElement) {
             const iconClass = localUtils.getFileIcon(fileTypeElement.innerHTML);
@@ -159,7 +162,13 @@ async function save() {
 }
 (window as any).save = save;
 
-function preview() {
-    window.open("../preview#/" + file_id)
+async function preview() {
+    const ext = file_name?.split('.').pop()?.toLowerCase();
+    if (ext == "link") {
+        const responce:any = await localUtils.GETFileContent(`files/download/${file_id}`, { "Authorization": "Bearer " + localUtils.getCookie("access_token") })
+        window.open(responce)
+    } else {
+        window.open("../preview#/" + file_id)
+    }
 }
 (window as any).preview = preview;

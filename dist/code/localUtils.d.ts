@@ -10,6 +10,7 @@ export declare class localUtils {
     static GET(url: string, headers: HeadersInit): Promise<any>;
     static DELETE(url: string, headers: HeadersInit): Promise<any>;
     static GETFile(url: string, headers: HeadersInit): Promise<any>;
+    static GETFileContent(url: string, headers: HeadersInit): Promise<any>;
     static getCookie(cname: string): string;
     static verifyRenewToken(inner: boolean): Promise<boolean>;
     static getPeopleOnline(): Promise<void>;

@@ -60,6 +60,8 @@ export class localUtils {
                 return 'fa fa-file-powerpoint';
             case 'dir':
                 return 'fa fa-folder';
+            case 'link':
+                return 'fa fa-link';
             default:
                 return 'fa fa-file';
         }
@@ -176,6 +178,17 @@ export class localUtils {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             return response.blob();
+        });
+    }
+    static GETFileContent(url, headers) {
+        return fetch(apiUrl + url, {
+            method: 'GET',
+            headers: headers
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.text();
         });
     }
     static getCookie(cname) {

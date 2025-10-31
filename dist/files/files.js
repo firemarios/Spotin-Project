@@ -72,7 +72,7 @@ function setIcons() {
             if (name && dir)
                 name.textContent = ((_a = name.textContent.split('.')[0]) === null || _a === void 0 ? void 0 : _a.toLowerCase()) || '';
             if (box)
-                box.onclick = () => {
+                box.onclick = () => __awaiter(this, void 0, void 0, function* () {
                     if (dir && !(hash.startsWith("#/"))) {
                         document.location = "../files/#/" + dir;
                         location.reload();
@@ -84,7 +84,7 @@ function setIcons() {
                     else {
                         document.location = "../files/view/#/" + file_id;
                     }
-                };
+                });
         });
     }
 }
