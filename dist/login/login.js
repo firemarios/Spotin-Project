@@ -8,6 +8,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { localUtils } from "../code/localUtils.js";
+onNavigation();
+function onNavigation() {
+    return __awaiter(this, void 0, void 0, function* () {
+        if ((yield localUtils.verifyRenewToken(false, true)) == true) {
+            document.location = "../home";
+        }
+    });
+}
 function login() {
     return __awaiter(this, void 0, void 0, function* () {
         var _a, _b;

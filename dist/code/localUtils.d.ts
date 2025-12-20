@@ -12,7 +12,7 @@ export declare class localUtils {
     static GETFile(url: string, headers: HeadersInit): Promise<any>;
     static GETFileContent(url: string, headers: HeadersInit): Promise<any>;
     static getCookie(cname: string): string;
-    static verifyRenewToken(inner: boolean): Promise<boolean>;
+    static verifyRenewToken(inner: boolean, login?: boolean): Promise<boolean>;
     static getPeopleOnline(): Promise<void>;
     static startHashWatcher(): void;
 }

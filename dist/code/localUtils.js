@@ -208,7 +208,7 @@ export class localUtils {
         }
         return "";
     }
-    static verifyRenewToken(inner) {
+    static verifyRenewToken(inner, login) {
         return __awaiter(this, void 0, void 0, function* () {
             var _a, _b;
             localUtils.GET("me", { "Authorization": "Bearer " + localUtils.getCookie("access_token") });
@@ -216,6 +216,7 @@ export class localUtils {
             const refresh_token = (_b = localUtils.getCookie("refresh_token")) !== null && _b !== void 0 ? _b : "0";
             const response = yield localUtils.POST("verify_token?token=" + access_token, { 'accept': 'application/json' }, {});
             if (response.valid) {
+                console.log("Access token valid");
                 return true; // access token is fine
             }
             // access token not valid, check refresh token
@@ -225,11 +226,15 @@ export class localUtils {
                 const response3 = yield localUtils.POST("refresh?token=" + refresh_token, { 'accept': 'application/json' }, {});
                 document.cookie = `access_token=${response3.access_token}; Path=/; SameSite=Lax;`;
                 document.cookie = `refresh_token=${response3.refresh_token}; Path=/; SameSite=Lax;`;
+                console.log("Access token renewed");
+                location.reload();
                 return true;
             }
             else {
                 // refresh token invalid → logout
-                logout(inner);
+                if (!login)
+                    logout(inner);
+                console.log("Tokens invalid, logging out");
                 return false;
             }
         });

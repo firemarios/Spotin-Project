@@ -1,5 +1,13 @@
 import { localUtils } from "../code/localUtils.js";
 
+onNavigation();
+
+async function onNavigation() {
+    if (await localUtils.verifyRenewToken(false, true) == true) {
+        document.location = "../home";
+    }
+}
+
 async function login() {
     const username = (document.getElementById("username") as HTMLInputElement | null)?.value;
     const password = (document.getElementById("password") as HTMLInputElement | null)?.value;
