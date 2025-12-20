@@ -6,11 +6,10 @@
   "scripts": {
     "clean": "rimraf dist",
     "build": "npm run clean && tsc && npm run copy",
-    "copy": "copyfiles -u 1 \"src/**/*.{html,css,png,ogg,gif,otf}\" \"src/assets/**/*\" dist/ && npm run copy-git",
+    "copy": "copyfiles -u 1 \"src/**/*.{html,css,png,ogg,gif,otf}\" \"src/assets/**/*\" dist/",
     "serve": "npx webpack serve",
     "watch": "chokidar \"src/**/*\" -i \"dist/**\" -c \"npm run build\"",
     "dev": "npm run build && npm-run-all --parallel serve watch",
-    "copy-git": "xcopy /E /I /H .git dist\\Pixelator\\.git"
   },
   "keywords": [],
   "author": "",
