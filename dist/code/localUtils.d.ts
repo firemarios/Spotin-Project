@@ -1,4 +1,4 @@
-export declare const apiUrl = "https://fireblocksmp.sdesignshost.gr:25575/";
+export declare const apiUrl = "https://fireblocksmp.sdesignshost.gr:25575/Spotin-Project-Api/";
 export declare class localUtils {
     static login(username: any, password: any): Promise<any>;
     static getFileIcon(fileName: string): string;
