@@ -1,4 +1,4 @@
-export const apiUrl = "https://fireblocksmp.sdesignshost.gr:25575/"
+export const apiUrl = "https://fireblocksmp.sdesignshost.gr:25575/Spotin-Project-Api/"
 
 export class localUtils {
     static login(username: any, password: any) {
